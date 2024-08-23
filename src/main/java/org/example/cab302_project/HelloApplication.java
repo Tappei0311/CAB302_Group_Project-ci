@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!"); //comment
         stage.setScene(scene);
         stage.show();
+        //rhodes changes
     }
 
     public static void main(String[] args) {
