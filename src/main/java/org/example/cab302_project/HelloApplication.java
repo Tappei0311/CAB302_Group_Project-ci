@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!"); //comment ??????
         stage.setScene(scene);
-        stage.show();//Tappei
+        stage.show();
     }
 
     public static void main(String[] args) {
