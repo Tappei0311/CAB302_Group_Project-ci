@@ -1,0 +1,20 @@
+
+/* Background colour for all views */
+.root {
+    -fx-background-color: #626569;
+}
+
+
+
+/* Styles for title labels */
+.title-label {
+    -fx-font-size: 20px;          /* Large font size */
+    -fx-font-weight: bold;        /* Bold font */
+    -fx-text-fill: white;         /* White text */
+    -fx-effect: dropshadow(gaussian, black, 5, 0, 0, 0); /* Outline effect */
+}
+
+/* Default text color for labels and buttons */
+.label, .button {
+    -fx-text-fill: white;
+}
