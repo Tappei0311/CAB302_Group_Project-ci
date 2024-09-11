@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.cab302_project.MenuController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+  </padding>
+
+  <!-- Title for Menu -->
+  <Label text="Ingredient Tracker" styleClass="title-label" style=" -fx-padding: 50;" />
+
+
+<!-- Buttons -->
+  <VBox alignment="CENTER" spacing="30" prefWidth="300">
+    <Button fx:id ="recommendRecipeButton"
+            text="Recommend Recipe"
+            style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
+            onAction="#recommendRecipeButton"
+    />
+    <Button text="Manage Ingredients" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+    <Button text="Manage Recipes" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+    <Button fx:id ="shoppingButton"
+            text="Generate Shopping List"
+            style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
+            onAction="#ShoppingListButton"
+    />
+  </VBox>
+
+</VBox>
