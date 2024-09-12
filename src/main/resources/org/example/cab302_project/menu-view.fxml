@@ -22,8 +22,15 @@
             style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
             onAction="#recommendRecipeButton"
     />
-    <Button text="Manage Ingredients" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+
+    <Button fx:id ="manageIngredientsButton"
+            text="Manage Ingredients"
+            style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
+            onAction="#manageIngredientsButton"
+    />
+
     <Button text="Manage Recipes" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+
     <Button fx:id ="shoppingButton"
             text="Generate Shopping List"
             style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"

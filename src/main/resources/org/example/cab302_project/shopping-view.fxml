@@ -3,24 +3,51 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.cab302_project.MenuController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
-    </padding>
+<?import javafx.scene.text.Text?>
 
-    <!-- Title for Menu -->
-    <Label text="Ingredient Tracker" styleClass="title-label" style=" -fx-padding: 50;" />
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.cab302_project.ShoppingListController">
 
+    <!-- VBox to hold the title and shopping list, centered -->
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="50.0">
+        <!-- Title -->
+        <Label text="Shopping List" styleClass="title-label" style="-fx-font-size: 20; -fx-text-fill: white;"/>
 
-    <!-- Buttons -->
-    <VBox alignment="CENTER" spacing="30" prefWidth="300">
-        <Button text="Recommend Recipe" style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
-        <Button text="Manage Ingredients" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
-        <Button text="Manage Recipes" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
-        <Button text="Generate Shopping list" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+        <!-- List of shopping items, centered -->
+        <GridPane hgap="1" vgap="1" alignment="CENTER">
+            <Label text="•" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="0"
+                   GridPane.columnIndex="0"/>
+            <Label text="Eggs" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="0"
+                   GridPane.columnIndex="1"/>
+
+            <Label text="•" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="1"
+                   GridPane.columnIndex="0"/>
+            <Label text="Broccoli" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="1"
+                   GridPane.columnIndex="1"/>
+
+            <Label text="•" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="2"
+                   GridPane.columnIndex="0"/>
+            <Label text="Mushroom" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="2"
+                   GridPane.columnIndex="1"/>
+
+            <Label text="•" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="3"
+                   GridPane.columnIndex="0"/>
+            <Label text="Butter" style="-fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="3"
+                   GridPane.columnIndex="1"/>
+        </GridPane>
     </VBox>
 
-</VBox>
+    <!-- Back button in the bottom-left corner -->
+    <Button fx:id="backButton"
+            text="Back"
+            style="-fx-background-color: #3a78f0; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;  "
+            prefWidth="80"
+            prefHeight="30"
+            AnchorPane.bottomAnchor="15.0"
+            AnchorPane.leftAnchor="15.0"
+            onAction="#backButton"/>
+</AnchorPane>
