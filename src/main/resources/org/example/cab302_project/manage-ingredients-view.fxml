@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.cab302_project.ManageIngredientsController"
+            style="-fx-background-color: #2B2B2B; -fx-padding: 10;">
+
+    <!-- Main container for the design -->
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0">
+
+        <!-- Title Label -->
+        <Label text="Manage Ingredients" style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+        <!-- Table and Quick Add/Subtract Section -->
+        <HBox alignment="CENTER" spacing="20.0">
+
+            <!-- TableView with Checkboxes for Ingredients -->
+            <TableView fx:id="ingredientsTable" prefHeight="200" prefWidth="200" style="-fx-background-color: #333333; -fx-text-fill: white;">
+                <!-- Column for Checkboxes -->
+                <TableColumn text="PK">
+                    <cellValueFactory><PropertyValueFactory property="checkbox"/></cellValueFactory>
+                    <cellFactory>
+
+                    </cellFactory>
+                </TableColumn>
+                <!-- Column for Ingredient Name -->
+                <TableColumn text="UniqueID">
+                    <cellValueFactory><PropertyValueFactory property="ingredient"/></cellValueFactory>
+                </TableColumn>
+            </TableView>
+
+            <!-- Quick Add/Subtract Section -->
+            <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #333333; -fx-padding: 10; -fx-border-color: black; -fx-border-width: 1;">
+                <Label text="Quick Add/Subtract" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <!-- List of Ingredients -->
+                <Label text="-250ml Milk" style="-fx-text-fill: white;"/>
+                <HBox spacing="5">
+                    <Button text="-" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"/>
+                    <Button text="+" style="-fx-background-color: #00d970; -fx-text-fill: white;"/>
+                </HBox>
+                <Label text="Tbsp of Butter" style="-fx-text-fill: white;"/>
+                <HBox spacing="5">
+                    <Button text="-" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"/>
+                    <Button text="+" style="-fx-background-color: #00d970; -fx-text-fill: white;"/>
+                </HBox>
+                <Label text="1 egg" style="-fx-text-fill: white;"/>
+                <HBox spacing="5">
+                    <Button text="-" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"/>
+                    <Button text="+" style="-fx-background-color: #00d970; -fx-text-fill: white;"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- Buttons at the bottom -->
+        <HBox alignment="CENTER" spacing="20.0">
+            <!-- Delete Selected Button -->
+            <Button text="delete selected" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;" prefWidth="120"/>
+            <!-- Add Ingredient and ComboBox -->
+            <VBox alignment="CENTER" spacing="5.0">
+                <Button text="add ingredient" style="-fx-background-color: #00d970; -fx-text-fill: white;" prefWidth="120"/>
+                <!-- Quantity Drop-Down -->
+                <ComboBox prefWidth="120">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="1"/>
+                            <String fx:value="2"/>
+                            <String fx:value="3"/>
+                            <String fx:value="4"/>
+                            <String fx:value="5"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
+        </HBox>
+
+    </VBox>
+    <Button fx:id="backButton"
+            text="Back"
+            style="-fx-background-color: #3a78f0; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;  "
+            prefWidth="80"
+            prefHeight="30"
+            AnchorPane.bottomAnchor="15.0"
+            AnchorPane.leftAnchor="15.0"
+            onAction="#backButton"/>
+
+
+</AnchorPane>
