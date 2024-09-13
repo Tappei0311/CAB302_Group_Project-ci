@@ -20,6 +20,10 @@ public class MenuController {
     @FXML
     private Button manageIngredientsButton;
 
+    @FXML
+    private Button manageRecipesButton;
+
+
 
     @FXML
     protected void recommendRecipeButton() throws IOException {
@@ -57,6 +61,21 @@ public class MenuController {
 
         stage.setScene(scene);
     }
+
+    @FXML
+    protected void manageRecipesButton() throws IOException {
+        Stage stage = (Stage) manageRecipesButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-recipes.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+
+        // Add stylesheet to the new scene
+        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
+
+        stage.setScene(scene);
+    }
+
+
+
 
 
 

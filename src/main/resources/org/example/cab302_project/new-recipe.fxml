@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302_project.NewRecipeController">
+    <children>
+        <ListView fx:id="ingredientList" layoutX="50" layoutY="50" prefHeight="200" prefWidth="300"/>
+        <TextField fx:id="recipeName" layoutX="50" layoutY="270" prefWidth="200" promptText="Recipe Name"/>
+        <TextField fx:id="ingredientInput" layoutX="50" layoutY="300" prefWidth="150" promptText="Add Ingredient"/>
+        <ComboBox fx:id="quantityComboBox" layoutX="210" layoutY="300" prefWidth="90"/>
+        <Button fx:id="addIngredientButton" layoutX="50" layoutY="340" text="Add Ingredient" onAction="#handleAddIngredientClick"/>
+        <Button fx:id="createRecipeButton" layoutX="370" layoutY="340" prefWidth="140" text="Create Recipe" onAction="#handleCreateRecipeClick"/>
+        <Button fx:id="updateIngredientButton" layoutX="210" layoutY="340" text="Update Ingredient" onAction="#handleUpdateIngredientClick" disable="true"/>
+
+    </children>
+</AnchorPane>

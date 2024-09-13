@@ -29,7 +29,12 @@
             onAction="#manageIngredientsButton"
     />
 
-    <Button text="Manage Recipes" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"/>
+    <!-- Updated Manage Recipes button -->
+    <Button fx:id="manageRecipesButton"
+            text="Manage Recipes"
+            style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
+            onAction="#manageRecipesButton"
+    />
 
     <Button fx:id ="shoppingButton"
             text="Generate Shopping List"
