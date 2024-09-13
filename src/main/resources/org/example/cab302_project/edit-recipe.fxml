@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.cab302_project.EditRecipeController">
+    <children>
+        <!-- TextField to edit recipe name -->
+        <TextField fx:id="recipeName" layoutX="50" layoutY="50" prefWidth="300" promptText="Recipe Name"/>
+
+        <!-- ListView to display ingredients -->
+        <ListView fx:id="ingredientList" layoutX="50" layoutY="100" prefHeight="150" prefWidth="300"/>
+
+        <!-- Input for new ingredient -->
+        <TextField fx:id="ingredientInput" layoutX="50" layoutY="270" prefWidth="150" promptText="Add Ingredient"/>
+
+        <!-- ComboBox for selecting quantity -->
+        <ComboBox fx:id="quantityComboBox" layoutX="210" layoutY="270" prefWidth="90"/>
+
+        <!-- Button to add the new ingredient -->
+        <Button fx:id="addIngredientButton" layoutX="50" layoutY="310" text="Add Ingredient" onAction="#handleAddIngredient"/>
+
+        <!-- Button to save the updated recipe -->
+        <Button fx:id="saveRecipeButton" layoutX="150" layoutY="310" text="Save Recipe" onAction="#handleSaveRecipe"/>
+
+        <Button fx:id="updateIngredientButton" layoutX="200" layoutY="340" text="Update Ingredient" onAction="#handleUpdateIngredient"/>
+
+    </children>
+</AnchorPane>
