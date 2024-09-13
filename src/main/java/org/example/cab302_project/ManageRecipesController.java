@@ -74,7 +74,7 @@ public class ManageRecipesController {
     // Handle "New Recipe" button click
     public void handleNewRecipeButtonClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ingredienttracker/new-recipe.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
@@ -100,7 +100,7 @@ public class ManageRecipesController {
         Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
         if (selectedRecipe != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ingredienttracker/edit-recipe.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/edit-recipe.fxml"));
                 Parent root = loader.load();
 
                 EditRecipeController editRecipeController = loader.getController();

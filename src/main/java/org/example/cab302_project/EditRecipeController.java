@@ -108,7 +108,7 @@ public class EditRecipeController {
         recipe.setName(recipeName.getText());
         ManageRecipesController.getInstance().saveRecipesToFile();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ingredienttracker/manage-recipes.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) recipeName.getScene().getWindow();
         Scene scene = new Scene(root);

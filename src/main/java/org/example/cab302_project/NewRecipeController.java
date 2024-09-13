@@ -41,7 +41,7 @@ public class NewRecipeController {
     @FXML
     public void initialize() {
         // Populate the quantity ComboBox with values 1-5
-        quantityComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+        quantityComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 
         // Set the ListView to display ingredients with delete functionality
         setupIngredientListView();
@@ -138,7 +138,7 @@ public class NewRecipeController {
 
             ManageRecipesController.getInstance().addRecipe(newRecipe);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ingredienttracker/manage-recipes.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) recipeName.getScene().getWindow();
             Scene scene = new Scene(root);
