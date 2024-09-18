@@ -107,6 +107,7 @@ public void delete(Ingredient ingredient) {
         statement.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();
+
     }
 }
 
