@@ -24,6 +24,9 @@ public class IngredientsDAO implements IIngredientDAO {
         ingredients.remove(ingredient);
     }
 
+    /*
+        just get one ingredient by id
+     */
     @Override
     public Ingredient getIngredient(int id) {
         for (Ingredient ingredient : ingredients) {
@@ -34,6 +37,9 @@ public class IngredientsDAO implements IIngredientDAO {
         return null;
     }
 
+    /*
+        get ingredient list without id
+     */
     @Override
     public List<Ingredient> getAllIngredients() {
         return new ArrayList<>(ingredients);
