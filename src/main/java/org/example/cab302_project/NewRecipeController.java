@@ -134,7 +134,7 @@ public class NewRecipeController {
 
         if (recipeText != null && !recipeText.trim().isEmpty() && !ingredients.isEmpty()) {
             Recipe newRecipe = new Recipe(recipeText);
-            newRecipe.getIngredients().addAll(ingredients);
+//            newRecipe.getIngredients().addAll(ingredients);
 
             ManageRecipesController.getInstance().addRecipe(newRecipe);
 

@@ -54,68 +54,68 @@ public class ManageRecipesController {
 
     @FXML
     public void initialize() {
-        if (recipes.isEmpty()) {
-            loadRecipesFromFile();
-        }
-        recipeList.setItems(recipes);
-
-        recipeList.getSelectionModel().selectedItemProperty().addListener((obs, oldRecipe, newRecipe) -> {
-            if (newRecipe != null) {
-                editRecipeButton.setDisable(false);
-                deleteRecipeButton.setDisable(false);
-                ingredientListView.setItems(newRecipe.getIngredients());
-            } else {
-                editRecipeButton.setDisable(true);
-                deleteRecipeButton.setDisable(true);
-            }
-        });
+//        if (recipes.isEmpty()) {
+//            loadRecipesFromFile();
+//        }
+//        recipeList.setItems(recipes);
+//
+//        recipeList.getSelectionModel().selectedItemProperty().addListener((obs, oldRecipe, newRecipe) -> {
+//            if (newRecipe != null) {
+//                editRecipeButton.setDisable(false);
+//                deleteRecipeButton.setDisable(false);
+//                ingredientListView.setItems(newRecipe.getIngredients());
+//            } else {
+//                editRecipeButton.setDisable(true);
+//                deleteRecipeButton.setDisable(true);
+//            }
+//        });
     }
 
     // Handle "New Recipe" button click
     public void handleNewRecipeButtonClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
+//            Parent root = loader.load();
+//
+//            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML
     public void handleDeleteRecipeClick(ActionEvent event) {
-        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
-        if (selectedRecipe != null) {
-            recipes.remove(selectedRecipe);
-            saveRecipesToFile();
-        }
+//        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
+//        if (selectedRecipe != null) {
+//            recipes.remove(selectedRecipe);
+//            saveRecipesToFile();
+//        }
     }
 
     @FXML
     public void handleEditRecipeClick(ActionEvent event) {
-        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
-        if (selectedRecipe != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/edit-recipe.fxml"));
-                Parent root = loader.load();
-
-                EditRecipeController editRecipeController = loader.getController();
-                editRecipeController.setRecipe(selectedRecipe);
-
-                Stage stage = (Stage) editRecipeButton.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setMinWidth(600);
-                stage.setMinHeight(400);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
+//        if (selectedRecipe != null) {
+//            try {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/edit-recipe.fxml"));
+//                Parent root = loader.load();
+//
+//                EditRecipeController editRecipeController = loader.getController();
+//                editRecipeController.setRecipe(selectedRecipe);
+//
+//                Stage stage = (Stage) editRecipeButton.getScene().getWindow();
+//                Scene scene = new Scene(root);
+//                stage.setMinWidth(600);
+//                stage.setMinHeight(400);
+//                stage.setScene(scene);
+//                stage.show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public void addRecipe(Recipe recipe) {
@@ -126,38 +126,38 @@ public class ManageRecipesController {
     }
 
     public void saveRecipesToFile() {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(RECIPE_FILE))) {
-            for (Recipe recipe : recipes) {
-                StringBuilder line = new StringBuilder(recipe.getName());
-                for (String ingredient : recipe.getIngredients()) {
-                    line.append(",").append(ingredient);
-                }
-                writer.write(line.toString());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(RECIPE_FILE))) {
+//            for (Recipe recipe : recipes) {
+//                StringBuilder line = new StringBuilder(recipe.getName());
+//                for (String ingredient : recipe.getIngredients()) {
+//                    line.append(",").append(ingredient);
+//                }
+//                writer.write(line.toString());
+//                writer.newLine();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void loadRecipesFromFile() {
-        Path path = Paths.get(RECIPE_FILE);
-        if (Files.exists(path)) {
-            try (BufferedReader reader = Files.newBufferedReader(path)) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts.length > 0) {
-                        Recipe recipe = new Recipe(parts[0]);
-                        for (int i = 1; i < parts.length; i++) {
-                            recipe.addIngredient(parts[i]);
-                        }
-                        recipes.add(recipe);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        Path path = Paths.get(RECIPE_FILE);
+//        if (Files.exists(path)) {
+//            try (BufferedReader reader = Files.newBufferedReader(path)) {
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    String[] parts = line.split(",");
+//                    if (parts.length > 0) {
+//                        Recipe recipe = new Recipe(parts[0]);
+//                        for (int i = 1; i < parts.length; i++) {
+//                            recipe.addIngredient(parts[i]);
+//                        }
+//                        recipes.add(recipe);
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 }

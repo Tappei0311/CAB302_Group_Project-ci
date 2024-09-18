@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class MenuController {
 
+
     @FXML
     private Button shoppingButton;
 
@@ -27,6 +28,7 @@ public class MenuController {
 
     @FXML
     protected void recommendRecipeButton() throws IOException {
+
         Stage stage = (Stage) recommendRecipeButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("recommend-recipe-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);

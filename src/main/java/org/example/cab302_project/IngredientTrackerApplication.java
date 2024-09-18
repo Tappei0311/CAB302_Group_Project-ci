@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.sql.Connection;
 
 //test
 public class IngredientTrackerApplication extends Application {
@@ -15,12 +16,18 @@ public class IngredientTrackerApplication extends Application {
     public static final String TITLE = "Ingredients Tracker";
     public static final int WIDTH = 340;
     public static final int HEIGHT = 450;
-
+IngredientsDAO ingredientsDAO = new IngredientsDAO();
+RecipeDAO recipeDAO = new RecipeDAO();
 //    // Background and text colouring constants
 //    public static final String BACKGROUND_STYLING = "-fx-background-color: #2B2B2B;";
 //    public static final String TEXT_STYLING = "-fx-text-fill: white;";
 
-
+    @Override
+    public void init() {
+        ingredientsDAO.createTable();
+        recipeDAO.createRecipeTable();
+        recipeDAO.createRecipeIngredientTable();
+    }
 
 
 
@@ -43,6 +50,9 @@ public class IngredientTrackerApplication extends Application {
         stage.setTitle(TITLE);
         stage.setScene(scene);
         stage.show();
+
+        Connection connection = DatabaseConnection.getInstance();
+
     }
 
     public static void main(String[] args) {

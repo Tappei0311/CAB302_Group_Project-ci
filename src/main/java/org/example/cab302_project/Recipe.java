@@ -4,15 +4,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Recipe {
+    private int id;
     private String name;  // Recipe name
-    private ObservableList<String> ingredients;  // List of ingredients for the recipe
+    private ObservableList<RecipieIngredients> ingredients;  // List of ingredients for the recipe
 
     // Constructor to initialize the recipe name and create an empty ingredients list
     public Recipe(String name) {
         this.name = name;
         this.ingredients = FXCollections.observableArrayList();
     }
-
+    public Recipe(int id, String name) {
+        this.name = name;
+        this.ingredients = FXCollections.observableArrayList();
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     // Getter for recipe name
     public String getName() {
         return name;
@@ -24,14 +34,17 @@ public class Recipe {
     }
 
     // Getter for ingredients list
-    public ObservableList<String> getIngredients() {
+    public ObservableList<RecipieIngredients> getIngredients() {
         return ingredients;
     }
 
     // Method to add an ingredient to the ingredients list
-    public void addIngredient(String ingredient) {
+    public void addIngredient(RecipieIngredients ingredient) {
         ingredients.add(ingredient);
     }
+
+
+
 
     // Method to remove an ingredient from the ingredients list
     public void removeIngredient(String ingredient) {

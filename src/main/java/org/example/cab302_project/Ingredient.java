@@ -2,47 +2,55 @@ package org.example.cab302_project;
 
 public class Ingredient {
     private int id;
-    private String ingredientName;
-    private int ingredientCount;
-    private int minThreshold;
-    private boolean quickAccess;
+    private String Ingredient;
+    private int Quantity;
+    private int MinQuantity;
+    private boolean quick_access;
 
-    public Ingredient(String ingredientName, int ingredientCount, int minThreshold) {
+    public Ingredient(int id,String Ingredient, int Quantity, int MinQuantity, boolean quick_access){
+        this.id = id;
+        this.Ingredient = Ingredient;
+        this.Quantity = Quantity;
+        this.MinQuantity = MinQuantity;
+        this.quick_access = quick_access;
+    }
+    public Ingredient(String Ingredient, int Quantity, int MinQuantity, boolean quick_access){
+        this.Ingredient = Ingredient;
+        this.Quantity = Quantity;
+        this.MinQuantity = MinQuantity;
+        this.quick_access = quick_access;
+    }
+   public Ingredient(String Ingredient, int Quantity, int MinQuantity) {
         this.ingredientName = ingredientName;
         this.ingredientCount = ingredientCount;
         this.minThreshold = minThreshold;
     }
-
     public int getId() {
         return id;
     }
-    public  void setId(int id) {
-        this.id = id;
+    public String getIngredient() {
+        return Ingredient;
     }
-    public String getIngredientName() {
-        return ingredientName;
+    public int getQuantity() {
+        return Quantity;
     }
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
+    public int getMinQuantity() {
+        return MinQuantity;
     }
-    public int getIngredientCount() {
-        return ingredientCount;
+    public boolean isQuick_access() {
+        return quick_access;
     }
-    public void setIngredientCount(int ingredientCount) {
-        this.ingredientCount = ingredientCount;
+    public void setName(String Ingredient) {
+        this.Ingredient = Ingredient;
     }
-    public int getMinThreshold() {
-        return minThreshold;
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
     }
-
-    public void setMinThreshold(int minThreshold) {
-        this.minThreshold = minThreshold;
+    public void setMinQuantity(int MinQuantity) {
+        this.MinQuantity = MinQuantity;
     }
-
-    public boolean isQuickAccess() {
-        return quickAccess;
-    }
-    public void setQuickAccess(boolean quickAccess) {
-        this.quickAccess = quickAccess;
+    public void setQuick_access(boolean quick_access) {
+        this.quick_access = quick_access;
     }
 }
+

@@ -13,6 +13,7 @@ public class DatabaseConnection {
         } catch (SQLException sqlEx) {
             System.err.println(sqlEx);
         }
+
     }
 
     public static Connection getInstance() {
@@ -22,3 +23,9 @@ public class DatabaseConnection {
         return instance;
     }
 }
+
+
+//need to  add
+
+
+//DatabaseConnection
