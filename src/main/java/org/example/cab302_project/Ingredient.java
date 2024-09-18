@@ -21,9 +21,9 @@ public class Ingredient {
         this.quick_access = quick_access;
     }
    public Ingredient(String Ingredient, int Quantity, int MinQuantity) {
-        this.ingredientName = ingredientName;
-        this.ingredientCount = ingredientCount;
-        this.minThreshold = minThreshold;
+        this.Ingredient = Ingredient;
+        this.Quantity = Quantity;
+        this.MinQuantity = MinQuantity;
     }
     public int getId() {
         return id;
