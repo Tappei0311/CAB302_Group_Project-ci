@@ -13,6 +13,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class ManageRecipesController {
 
@@ -138,6 +139,22 @@ public class ManageRecipesController {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    @FXML
+    private Button backButton;
+
+
+    @FXML
+    protected void backButton() throws IOException {
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("menu-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+
+        // Add stylesheet to the new scene
+        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
+
+        stage.setScene(scene);
     }
 
     private void loadRecipesFromFile() {

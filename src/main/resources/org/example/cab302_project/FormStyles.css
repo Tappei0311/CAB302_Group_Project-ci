@@ -1,7 +1,7 @@
 
 /* Background colour for all views */
 .root {
-    -fx-background-color: #626569;
+    -fx-background-color: #2B2B2B;
 }
 
 
@@ -17,4 +17,7 @@
 /* Default text color for labels and buttons */
 .label, .button {
     -fx-text-fill: white;
+        -fx-font-weight: bold;
+
+        -fx-effect: dropshadow(gaussian, black, 2, 2, 2, 2);
 }

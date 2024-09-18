@@ -32,6 +32,7 @@ public class MenuController {
         Stage stage = (Stage) recommendRecipeButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("recommend-recipe-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        stage.setTitle("Recommend Recipe");
 
         // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
@@ -44,6 +45,7 @@ public class MenuController {
         Stage stage = (Stage) manageIngredientsButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-ingredients-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        stage.setTitle("Manage Ingredients");
 
         // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
@@ -57,6 +59,8 @@ public class MenuController {
         Stage stage = (Stage) shoppingButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("shopping-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        stage.setTitle("Shopping List");
+
 
         // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
@@ -68,7 +72,8 @@ public class MenuController {
     protected void manageRecipesButton() throws IOException {
         Stage stage = (Stage) manageRecipesButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-recipes.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        Scene scene = new Scene(fxmlLoader.load(), 650, 400);
+        stage.setTitle("Manage Recipes");
 
         // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
