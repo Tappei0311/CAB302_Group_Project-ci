@@ -11,12 +11,19 @@
 <?import javafx.scene.control.ListView?>
 
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.cab302_project.NewIngredientController">
 
     <Label text="New Ingredient Creation" layoutX="50" layoutY="10" style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" />
 
-    <ListView fx:id="recipeList" layoutX="50" layoutY="50" prefHeight="200" prefWidth="200"/>
+    <TextField fx:id="ingredientName" layoutX="50" layoutY="40" prefWidth="200" promptText="Ingredient Name"/>
 
+    <TextField fx:id="quantity" layoutX="50" layoutY="80" prefWidth="200" promptText="Quantity"/>
+
+    <TextField fx:id="minQuantity" layoutX="50" layoutY="120" prefWidth="200" promptText="Min Quantity"/>
+
+    <CheckBox fx:id="quickAccess" layoutX="50" layoutY="160" text="Quick access" style="-fx-text-fill: white"/>
 
     <!-- Back button in the bottom-left corner -->
     <Button fx:id="backButton"
