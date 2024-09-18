@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.sql.Connection;
 
 //test
 public class IngredientTrackerApplication extends Application {
@@ -43,6 +44,9 @@ public class IngredientTrackerApplication extends Application {
         stage.setTitle(TITLE);
         stage.setScene(scene);
         stage.show();
+
+        Connection connection = DatabaseConnection.getInstance();
+
     }
 
     public static void main(String[] args) {
