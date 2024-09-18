@@ -13,6 +13,7 @@ public class DatabaseConnection {
         } catch (SQLException sqlEx) {
             System.err.println(sqlEx);
         }
+
     }
 
     public static Connection getInstance() {
@@ -23,6 +24,8 @@ public class DatabaseConnection {
     }
 }
 
+
 //need to  add
-//IngredientsDAO.createTable();
+
+
 //DatabaseConnection

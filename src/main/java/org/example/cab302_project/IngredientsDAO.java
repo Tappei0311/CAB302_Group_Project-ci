@@ -84,6 +84,32 @@ public class IngredientsDAO {
         }
         return null;
     }
+
+    //update
+    public void updateContact(Ingredient ingredient) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE ingredient SET Ingredient = ?, Quantity = ?, MinQuantity = ?, quick_access = ? WHERE id = ?");
+            statement.setString(1, ingredient.getIngredient());
+            statement.setInt(2, ingredient.getQuantity());
+            statement.setInt(3, ingredient.getMinQuantity());
+            statement.setBoolean(4, ingredient.isQuick_access());
+            statement.setInt(5, ingredient.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//delete
+public void delete(Ingredient ingredient) {
+    try {
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM Ingredient WHERE id = ?");
+        statement.setInt(1, ingredient.getId());
+        statement.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
     public void close() {
         try {
             connection.close();

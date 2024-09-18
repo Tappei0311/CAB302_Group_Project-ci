@@ -16,12 +16,18 @@ public class IngredientTrackerApplication extends Application {
     public static final String TITLE = "Ingredients Tracker";
     public static final int WIDTH = 340;
     public static final int HEIGHT = 450;
-
+IngredientsDAO ingredientsDAO = new IngredientsDAO();
+RecipeDAO recipeDAO = new RecipeDAO();
 //    // Background and text colouring constants
 //    public static final String BACKGROUND_STYLING = "-fx-background-color: #2B2B2B;";
 //    public static final String TEXT_STYLING = "-fx-text-fill: white;";
 
-
+    @Override
+    public void init() {
+        ingredientsDAO.createTable();
+        recipeDAO.createRecipeTable();
+        recipeDAO.createRecipeIngredientTable();
+    }
 
 
 
