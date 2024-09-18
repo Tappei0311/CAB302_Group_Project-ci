@@ -63,7 +63,10 @@
             <Button text="delete selected" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;" prefWidth="120"/>
             <!-- Add Ingredient and ComboBox -->
             <VBox alignment="CENTER" spacing="5.0">
-                <Button text="add ingredient" style="-fx-background-color: #00d970; -fx-text-fill: white;" prefWidth="120"/>
+                <Button fx:id="addIngredientButton" text="Add Ingredient" style="-fx-background-color: #00d970; -fx-text-fill: white;" prefWidth="120"
+                        onAction="#addIngredientButton"/>
+
+
                 <!-- Quantity Drop-Down -->
                 <ComboBox prefWidth="120">
                     <items>

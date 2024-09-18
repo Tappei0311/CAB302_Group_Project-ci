@@ -15,6 +15,11 @@ public class ManageIngredientsController {
     @FXML
     private Button backButton;
 
+    @FXML
+    private Button addIngredientButton;
+
+
+
 
     @FXML
     protected void backButton() throws IOException {
@@ -28,6 +33,18 @@ public class ManageIngredientsController {
         stage.setScene(scene);
     }
 
+    @FXML
+    protected void addIngredientButton() throws IOException {
+        Stage stage = (Stage) addIngredientButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("new-ingredient-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
 
+        // Add stylesheet to the new scene
+        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
+
+        stage.setScene(scene);
+    }
 
 }
+
+
