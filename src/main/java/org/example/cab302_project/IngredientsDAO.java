@@ -38,7 +38,7 @@ public class IngredientsDAO implements IIngredientDAO {
     }
 
     /*
-        get ingredient list without id
+        get ingredient list which all ingredient
      */
     @Override
     public List<Ingredient> getAllIngredients() {
