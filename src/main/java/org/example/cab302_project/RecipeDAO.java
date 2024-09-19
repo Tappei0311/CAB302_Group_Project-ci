@@ -97,12 +97,17 @@ public class RecipeDAO {
                     "INSERT INTO RecipeIngredients (Recipeid, Ingredientid, ingredientUsage) VALUES (?,?,?)"
             );
             insertRecipeIngredient.setInt(1, ingredient.getRecipeId());
-            insertRecipeIngredient.setInt(2, ingredient.getIngredient().getId());
+            insertRecipeIngredient.setInt(2, ingredient.getIngredientId());  // Use getIngredientId() instead of getIngredient().getId()
             insertRecipeIngredient.setInt(3, ingredient.getAmount());
 
-            insertRecipeIngredient.execute();
+            int affectedRows = insertRecipeIngredient.executeUpdate();
+            System.out.println("Inserted RecipeIngredient: RecipeId=" + ingredient.getRecipeId()
+                    + ", IngredientId=" + ingredient.getIngredientId()
+                    + ", Amount=" + ingredient.getAmount()
+                    + ", Affected Rows=" + affectedRows);
         } catch (SQLException ex) {
-            System.err.println(ex);
+            System.err.println("Error inserting recipe ingredient: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

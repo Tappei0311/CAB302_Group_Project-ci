@@ -22,6 +22,11 @@ public class DatabaseConnection {
         }
         return instance;
     }
+
+    // Add this method for testing
+    public static void setTestInstance(Connection testConnection) {
+        instance = testConnection;
+    }
 }
 
 

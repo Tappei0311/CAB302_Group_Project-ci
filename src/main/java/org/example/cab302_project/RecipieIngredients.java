@@ -3,20 +3,28 @@ package org.example.cab302_project;
 public class RecipieIngredients {
     private int id;
     private int recipeId;
+    private int ingredientId;  // Add this line
     private Ingredient ingredient;
     private int amount;
 
-    public RecipieIngredients(int id,int RecipeId, Ingredient ingredient, int Amount){
+    public RecipieIngredients(int id, int recipeId, Ingredient ingredient, int amount) {
         this.id = id;
-        this.recipeId = RecipeId;
+        this.recipeId = recipeId;
+        this.ingredientId = ingredient.getId();  // Add this line
         this.ingredient = ingredient;
-        this.amount = Amount;
-
+        this.amount = amount;
     }
-    public RecipieIngredients(int RecipeId, Ingredient ingredient, int Amount){
-        this.recipeId = RecipeId;
+
+    public RecipieIngredients(int recipeId, Ingredient ingredient, int amount) {
+        this.recipeId = recipeId;
+        this.ingredientId = ingredient.getId();  // Add this line
         this.ingredient = ingredient;
-        this.amount = Amount;
+        this.amount = amount;
+    }
+
+    // Add getter for ingredientId
+    public int getIngredientId() {
+        return ingredientId;
     }
     public int getId() {
         return id;
