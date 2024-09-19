@@ -29,7 +29,7 @@ public class ManageIngredientsController {
 
         // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
-
+        stage.setTitle("Ingredient Tracker");
         stage.setScene(scene);
     }
 

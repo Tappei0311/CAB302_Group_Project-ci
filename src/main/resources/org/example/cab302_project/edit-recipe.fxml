@@ -6,8 +6,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.cab302_project.EditRecipeController">
+    <Label text="Edit Recipes" layoutX="60" layoutY="10" style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;" />
     <children>
         <!-- TextField to edit recipe name -->
         <TextField fx:id="recipeName" layoutX="50" layoutY="50" prefWidth="300" promptText="Recipe Name"/>
@@ -22,11 +24,23 @@
         <ComboBox fx:id="quantityComboBox" layoutX="210" layoutY="270" prefWidth="90"/>
 
         <!-- Button to add the new ingredient -->
-        <Button fx:id="addIngredientButton" layoutX="50" layoutY="310" text="Add Ingredient" onAction="#handleAddIngredient"/>
+        <Button fx:id="addIngredientButton" layoutX="50" layoutY="310" text="Add Ingredient" onAction="#handleAddIngredient"
+                styleClass="new-recipe-button"/>
 
         <!-- Button to save the updated recipe -->
-        <Button fx:id="saveRecipeButton" layoutX="150" layoutY="310" text="Save Recipe" onAction="#handleSaveRecipe"/>
+        <Button fx:id="saveRecipeButton" layoutX="180" layoutY="310" text="Save Recipe" onAction="#handleSaveRecipe"
+                styleClass="redirect-button"/>
 
-        <Button fx:id="updateIngredientButton" layoutX="200" layoutY="340" text="Update Ingredient" onAction="#handleUpdateIngredient"/>
+        <Button fx:id="updateIngredientButton" layoutX="180" layoutY="340" text="Update Ingredient" onAction="#handleUpdateIngredient"
+                styleClass="edit-button"/>
+
+        <Button fx:id="backButton"
+                text="Back"
+                style="-fx-background-color: #3a78f0; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;  "
+                prefWidth="80"
+                prefHeight="30"
+                AnchorPane.bottomAnchor="15.0"
+                AnchorPane.leftAnchor="15.0"
+                onAction="#backButton"/>
     </children>
 </AnchorPane>

@@ -72,7 +72,7 @@ public class MenuController {
     protected void manageRecipesButton() throws IOException {
         Stage stage = (Stage) manageRecipesButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-recipes.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 650, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 650, 420);
         stage.setTitle("Manage Recipes");
 
         // Add stylesheet to the new scene
@@ -80,6 +80,8 @@ public class MenuController {
 
         stage.setScene(scene);
     }
+
+
 
 
 

@@ -103,7 +103,7 @@ public class NewIngredientController {
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
 
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
-
+        stage.setTitle("Ingredient Tracker");
         stage.setScene(scene);
     }
 }
