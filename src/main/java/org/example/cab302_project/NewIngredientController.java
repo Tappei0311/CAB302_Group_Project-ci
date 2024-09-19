@@ -4,9 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,41 +30,71 @@ public class NewIngredientController {
     @FXML
     private Button createButton;
 
+    private IngredientsDAO ingredientsDAO;
+
+    public NewIngredientController() {
+        ingredientsDAO = new IngredientsDAO();
+    }
+
     @FXML
     public void initialize() {
-        // allow integer to quantity
+        // Existing input validation code
         quantity.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                // if the value doesn't integer, set back to old value
                 quantity.setText(oldValue);
             }
         });
 
         minQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                // if the value doesn't integer, set back to old value
                 minQuantity.setText(oldValue);
             }
         });
     }
 
     @FXML
-    public void addIngredient(ActionEvent actionEvent){
-        String IngredientName = ingredientName.getText();
-        String Quantity_String = quantity.getText();
-        String minthreshold_String = minQuantity.getText();
-        boolean quickaccess = quickAccess.isSelected();
+    public void addIngredient(ActionEvent actionEvent) {
+        String ingredientNameValue = ingredientName.getText().trim();
+        String quantityString = quantity.getText().trim();
+        String minQuantityString = minQuantity.getText().trim();
+        boolean isQuickAccess = quickAccess.isSelected();
 
-        if (ingredientName != null && Quantity_String != null && minthreshold_String != null){
-            int Quantity_int = Integer.parseInt(Quantity_String);
-            int minthreshold_int = Integer.parseInt(minthreshold_String);
-            Ingredient newIngredient = new Ingredient(IngredientName, Quantity_int, minthreshold_int, quickaccess);
+        if (ingredientNameValue.isEmpty() || quantityString.isEmpty() || minQuantityString.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "All fields must be filled.");
+            return;
+        }
+
+        try {
+            int quantityValue = Integer.parseInt(quantityString);
+            int minQuantityValue = Integer.parseInt(minQuantityString);
+
+            Ingredient newIngredient = new Ingredient(ingredientNameValue, quantityValue, minQuantityValue, isQuickAccess);
+            ingredientsDAO.Insert(newIngredient);
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Ingredient added successfully.");
+            clearFields();
+
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Quantity and Minimum Quantity must be valid numbers.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while adding the ingredient: " + e.getMessage());
         }
     }
 
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
-
-
+    private void clearFields() {
+        ingredientName.clear();
+        quantity.clear();
+        minQuantity.clear();
+        quickAccess.setSelected(false);
+    }
 
     @FXML
     protected void backButton() throws IOException {
@@ -74,10 +102,8 @@ public class NewIngredientController {
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-ingredients-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
 
-        // Add stylesheet to the new scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
 
         stage.setScene(scene);
     }
-
 }

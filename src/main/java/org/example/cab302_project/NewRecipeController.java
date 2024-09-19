@@ -1,92 +1,97 @@
 package org.example.cab302_project;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewRecipeController {
 
     @FXML
-    private ListView<String> ingredientList;
+    private ListView<RecipieIngredients> ingredientList;
 
     @FXML
     private TextField recipeName;
 
     @FXML
-    private TextField ingredientInput;
+    private ComboBox<Ingredient> ingredientComboBox;
 
     @FXML
     private ComboBox<String> quantityComboBox;
 
     @FXML
-    private Button addIngredientButton;  // Add Ingredient Button
-    @FXML
-    private Button updateIngredientButton;  // Update Ingredient Button
+    private Button addIngredientButton;
 
-    private ObservableList<String> ingredients = FXCollections.observableArrayList();
-    private int editingIngredientIndex = -1;  // Track which ingredient is being edited
+    @FXML
+    private Button updateIngredientButton;
+
+    private ObservableList<RecipieIngredients> ingredients = FXCollections.observableArrayList();
+    private int editingIngredientIndex = -1;
+
+    private RecipeDAO recipeDAO;
+    private IngredientsDAO ingredientsDAO;
+
+    public NewRecipeController() {
+        recipeDAO = new RecipeDAO();
+        ingredientsDAO = new IngredientsDAO();
+    }
 
     @FXML
     public void initialize() {
-        // Populate the quantity ComboBox with values 1-5
         quantityComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-
-        // Set the ListView to display ingredients with delete functionality
         setupIngredientListView();
         ingredientList.setItems(ingredients);
-
-        // Initially, disable the Update button
         updateIngredientButton.setDisable(true);
+        loadIngredients();
+    }
+
+    private void loadIngredients() {
+        List<Ingredient> allIngredients = ingredientsDAO.getAll();
+        ingredientComboBox.setItems(FXCollections.observableArrayList(allIngredients));
     }
 
     private void setupIngredientListView() {
-        ingredientList.setCellFactory(new Callback<>() {
+        ingredientList.setCellFactory(new Callback<ListView<RecipieIngredients>, ListCell<RecipieIngredients>>() {
             @Override
-            public ListCell<String> call(ListView<String> listView) {
-                return new ListCell<>() {
+            public ListCell<RecipieIngredients> call(ListView<RecipieIngredients> param) {
+                return new ListCell<RecipieIngredients>() {
                     private final Button deleteButton = new Button("Delete");
                     private final Button editButton = new Button("Edit");
 
                     {
                         deleteButton.setOnAction(event -> {
-                            String ingredient = getItem();
-                            ingredients.remove(ingredient);  // Remove ingredient from the list
-                            ingredientList.setItems(ingredients);  // Refresh the list
+                            RecipieIngredients ingredient = getItem();
+                            ingredients.remove(ingredient);
                         });
 
                         editButton.setOnAction(event -> {
-                            // Enter edit mode for this ingredient
                             editingIngredientIndex = getIndex();
-                            String[] parts = getItem().split(" \\(Qty: ");
-                            ingredientInput.setText(parts[0]);
-                            quantityComboBox.setValue(parts[1].replace(")", ""));
-
-                            // Enable the Update button and disable the Add button
+                            RecipieIngredients ingredient = getItem();
+                            ingredientComboBox.setValue(ingredient.getIngredient());
+                            quantityComboBox.setValue(String.valueOf(ingredient.getAmount()));
                             updateIngredientButton.setDisable(false);
                             addIngredientButton.setDisable(true);
                         });
                     }
 
                     @Override
-                    protected void updateItem(String ingredient, boolean empty) {
+                    protected void updateItem(RecipieIngredients ingredient, boolean empty) {
                         super.updateItem(ingredient, empty);
                         if (empty || ingredient == null) {
                             setText(null);
                             setGraphic(null);
                         } else {
-                            setText(ingredient);
+                            setText(ingredient.getIngredient().getIngredient() + " (Qty: " + ingredient.getAmount() + ")");
                             setGraphic(new javafx.scene.layout.HBox(deleteButton, editButton));
                         }
                     }
@@ -97,55 +102,65 @@ public class NewRecipeController {
 
     @FXML
     public void handleAddIngredientClick(ActionEvent actionEvent) {
-        String ingredientText = ingredientInput.getText();
+        Ingredient selectedIngredient = ingredientComboBox.getValue();
         String quantity = quantityComboBox.getValue();
 
-        if (ingredientText != null && !ingredientText.trim().isEmpty() && quantity != null) {
-            String ingredient = ingredientText + " (Qty: " + quantity + ")";
-            ingredients.add(ingredient);
-            ingredientList.setItems(ingredients);
-            ingredientInput.clear();
-        } else {
-            System.out.println("Please provide both ingredient and quantity.");
+        if (selectedIngredient != null && quantity != null) {
+            RecipieIngredients newIngredient = new RecipieIngredients(0, selectedIngredient, Integer.parseInt(quantity));
+            ingredients.add(newIngredient);
+            ingredientComboBox.setValue(null);
+            quantityComboBox.setValue(null);
         }
     }
 
     @FXML
     public void handleUpdateIngredientClick(ActionEvent actionEvent) {
-        String updatedIngredient = ingredientInput.getText() + " (Qty: " + quantityComboBox.getValue() + ")";
+        Ingredient updatedIngredient = ingredientComboBox.getValue();
+        String updatedQuantity = quantityComboBox.getValue();
 
-        if (editingIngredientIndex >= 0 && !updatedIngredient.isEmpty()) {
-            ingredients.set(editingIngredientIndex, updatedIngredient);  // Update ingredient in the list
-            ingredientList.setItems(ingredients);
-            ingredientInput.clear();  // Reset input fields
-            editingIngredientIndex = -1;  // Reset edit index
+        if (editingIngredientIndex >= 0 && updatedIngredient != null && updatedQuantity != null) {
+            RecipieIngredients ingredient = ingredients.get(editingIngredientIndex);
+            ingredient.setIngredient(updatedIngredient);
+            ingredient.setAmount(Integer.parseInt(updatedQuantity));
+            ingredients.set(editingIngredientIndex, ingredient);
 
-            // Re-enable the Add button and disable the Update button
+            ingredientComboBox.setValue(null);
+            quantityComboBox.setValue(null);
+            editingIngredientIndex = -1;
             addIngredientButton.setDisable(false);
             updateIngredientButton.setDisable(true);
-        } else {
-            System.out.println("Invalid ingredient or quantity.");
         }
     }
 
-    @FXML
     public void handleCreateRecipeClick(ActionEvent actionEvent) throws IOException {
         String recipeText = recipeName.getText();
 
         if (recipeText != null && !recipeText.trim().isEmpty() && !ingredients.isEmpty()) {
             Recipe newRecipe = new Recipe(recipeText);
-//            newRecipe.getIngredients().addAll(ingredients);
+            int recipeId = recipeDAO.InsertRecipe(newRecipe);
 
-            ManageRecipesController.getInstance().addRecipe(newRecipe);
+            if (recipeId != -1) {
+                System.out.println("Created recipe with ID: " + recipeId);
+                for (RecipieIngredients ingredient : ingredients) {
+                    ingredient.setRecipeId(recipeId);
+                    recipeDAO.InsertRecipeIngredient(ingredient);
+                    System.out.println("Inserted ingredient: " + ingredient.getIngredient().getIngredient() + " for recipe ID: " + recipeId);
+                }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) recipeName.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) recipeName.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to create recipe. Please try again.");
+                alert.showAndWait();
+            }
         } else {
-            System.out.println("Recipe name and ingredients must not be empty.");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Recipe name and ingredients must not be empty.");
+            alert.showAndWait();
         }
     }
+
 }

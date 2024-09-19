@@ -11,16 +11,13 @@
         <Button fx:id="newRecipeButton" layoutX="50" layoutY="270" prefWidth="150" text="New Recipe" onAction="#handleNewRecipeButtonClick"/>
         <Button fx:id="editRecipeButton" layoutX="270" layoutY="270" prefWidth="150" text="Edit Recipe" onAction="#handleEditRecipeClick" disable="true"/>
         <Button fx:id="deleteRecipeButton" layoutX="430" layoutY="270" prefWidth="150" text="Delete Recipe" onAction="#handleDeleteRecipeClick" disable="true"/>
+        <Button fx:id="backButton"
+                text="Back"
+                style="-fx-background-color: #3a78f0; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;"
+                prefWidth="80"
+                prefHeight="30"
+                AnchorPane.bottomAnchor="15.0"
+                AnchorPane.leftAnchor="15.0"
+                onAction="#backButton"/>
     </children>
-
-    <Button fx:id="backButton"
-            text="Back"
-            style="-fx-background-color: #3a78f0; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold;  "
-            prefWidth="80"
-            prefHeight="30"
-            AnchorPane.bottomAnchor="15.0"
-            AnchorPane.leftAnchor="15.0"
-            onAction="#backButton"/>
 </AnchorPane>
-
-

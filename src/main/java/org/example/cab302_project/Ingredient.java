@@ -52,5 +52,13 @@ public class Ingredient {
     public void setQuick_access(boolean quick_access) {
         this.quick_access = quick_access;
     }
+
+    @Override
+    public String toString() {
+        return this.Ingredient;
+    }
 }
+
+
+
 

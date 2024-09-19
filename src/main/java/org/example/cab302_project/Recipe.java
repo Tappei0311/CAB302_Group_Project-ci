@@ -5,15 +5,17 @@ import javafx.collections.ObservableList;
 
 public class Recipe {
     private int id;
-    private String name;  // Recipe name
-    private ObservableList<RecipieIngredients> ingredients;  // List of ingredients for the recipe
+    private String name;
+    private ObservableList<RecipieIngredients> ingredients;
 
-    // Constructor to initialize the recipe name and create an empty ingredients list
     public Recipe(String name) {
+        this.id = -1; // Use -1 to indicate a new, unsaved recipe
         this.name = name;
         this.ingredients = FXCollections.observableArrayList();
     }
+
     public Recipe(int id, String name) {
+        this.id = id;
         this.name = name;
         this.ingredients = FXCollections.observableArrayList();
     }

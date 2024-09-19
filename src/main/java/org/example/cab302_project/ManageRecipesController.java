@@ -1,4 +1,5 @@
 package org.example.cab302_project;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,25 +11,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
+import java.util.List;
 
 public class ManageRecipesController {
 
     @FXML
-    private ListView<Recipe> recipeList;  // Store Recipe objects
+    private ListView<Recipe> recipeList;
 
     @FXML
-    private ListView<String> ingredientListView;  // Display ingredients when recipe is clicked
+    private ListView<String> ingredientListView;
 
     @FXML
     private Button newRecipeButton;
-
-    @FXML
-    private Button updateIngredientButton;
-
 
     @FXML
     private Button editRecipeButton;
@@ -36,145 +30,114 @@ public class ManageRecipesController {
     @FXML
     private Button deleteRecipeButton;
 
-    private static ManageRecipesController instance;  // Singleton instance
+    @FXML
+    private Button backButton;
 
-    // File to store recipes
-    private static final String RECIPE_FILE = "recipes.csv";
-
-    private static ObservableList<Recipe> recipes = FXCollections.observableArrayList();
+    private RecipeDAO recipeDAO;
+    private IngredientsDAO ingredientsDAO;
 
     public ManageRecipesController() {
-        if (instance == null) {
-            instance = this;
-        }
-    }
-
-    public static ManageRecipesController getInstance() {
-        return instance;
+        recipeDAO = new RecipeDAO();
+        ingredientsDAO = new IngredientsDAO();
     }
 
     @FXML
     public void initialize() {
-//        if (recipes.isEmpty()) {
-//            loadRecipesFromFile();
-//        }
-//        recipeList.setItems(recipes);
-//
-//        recipeList.getSelectionModel().selectedItemProperty().addListener((obs, oldRecipe, newRecipe) -> {
-//            if (newRecipe != null) {
-//                editRecipeButton.setDisable(false);
-//                deleteRecipeButton.setDisable(false);
-//                ingredientListView.setItems(newRecipe.getIngredients());
-//            } else {
-//                editRecipeButton.setDisable(true);
-//                deleteRecipeButton.setDisable(true);
-//            }
-//        });
+        loadRecipes();
+        recipeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                System.out.println("Selected recipe: " + newValue.getName() + ", ID: " + newValue.getId());
+                loadIngredientsForRecipe(newValue);
+                editRecipeButton.setDisable(false);
+                deleteRecipeButton.setDisable(false);
+            } else {
+                ingredientListView.getItems().clear();
+                editRecipeButton.setDisable(true);
+                deleteRecipeButton.setDisable(true);
+            }
+        });
     }
 
-    // Handle "New Recipe" button click
-    public void handleNewRecipeButtonClick(ActionEvent event) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
-//            Parent root = loader.load();
-//
-//            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    private void loadRecipes() {
+        List<Recipe> recipes = recipeDAO.getAll();
+        ObservableList<Recipe> observableRecipes = FXCollections.observableArrayList(recipes);
+        recipeList.setItems(observableRecipes);
+        System.out.println("Loaded " + recipes.size() + " recipes");
+        for (Recipe recipe : recipes) {
+            System.out.println("Loaded Recipe: " + recipe.getName() + ", ID: " + recipe.getId());
+        }
+    }
+
+    private void loadIngredientsForRecipe(Recipe recipe) {
+        List<RecipieIngredients> ingredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
+        ingredientListView.getItems().clear();
+        for (RecipieIngredients ri : ingredients) {
+            ingredientListView.getItems().add(ri.getIngredient().getIngredient() + " (Qty: " + ri.getAmount() + ")");
+        }
+        System.out.println("Loaded " + ingredients.size() + " ingredients for recipe: " + recipe.getName());
+    }
+
+
+
+    private void loadIngredients(Recipe recipe) {
+        // This method needs to be implemented in RecipeDAO
+        // List<RecipieIngredients> recipeIngredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
+        // ObservableList<String> ingredients = FXCollections.observableArrayList();
+        // for (RecipieIngredients ri : recipeIngredients) {
+        //     ingredients.add(ri.getIngredient().getIngredient() + " (Qty: " + ri.getAmount() + ")");
+        // }
+        // ingredientListView.setItems(ingredients);
+    }
+
+    @FXML
+    public void handleNewRecipeButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void handleEditRecipeClick(ActionEvent event) throws IOException {
+        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
+        if (selectedRecipe != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/edit-recipe.fxml"));
+            Parent root = loader.load();
+            EditRecipeController controller = loader.getController();
+            controller.setRecipe(selectedRecipe);
+
+            Stage stage = (Stage) editRecipeButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @FXML
     public void handleDeleteRecipeClick(ActionEvent event) {
-//        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
-//        if (selectedRecipe != null) {
-//            recipes.remove(selectedRecipe);
-//            saveRecipesToFile();
-//        }
-    }
-
-    @FXML
-    public void handleEditRecipeClick(ActionEvent event) {
-//        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
-//        if (selectedRecipe != null) {
-//            try {
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/edit-recipe.fxml"));
-//                Parent root = loader.load();
-//
-//                EditRecipeController editRecipeController = loader.getController();
-//                editRecipeController.setRecipe(selectedRecipe);
-//
-//                Stage stage = (Stage) editRecipeButton.getScene().getWindow();
-//                Scene scene = new Scene(root);
-//                stage.setMinWidth(600);
-//                stage.setMinHeight(400);
-//                stage.setScene(scene);
-//                stage.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-    }
-
-    public void addRecipe(Recipe recipe) {
-        if (recipe != null && !recipe.getName().isEmpty()) {
-            recipes.add(recipe);
-            saveRecipesToFile();
+        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
+        if (selectedRecipe != null) {
+            System.out.println("Attempting to delete recipe: " + selectedRecipe.getName() + ", ID: " + selectedRecipe.getId());
+            boolean deleted = recipeDAO.deleteRecipe(selectedRecipe);
+            if (deleted) {
+                System.out.println("Successfully deleted recipe: " + selectedRecipe.getName());
+            } else {
+                System.out.println("Failed to delete recipe: " + selectedRecipe.getName());
+            }
+            loadRecipes();
+            ingredientListView.getItems().clear();
         }
     }
-
-    public void saveRecipesToFile() {
-//        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(RECIPE_FILE))) {
-//            for (Recipe recipe : recipes) {
-//                StringBuilder line = new StringBuilder(recipe.getName());
-//                for (String ingredient : recipe.getIngredients()) {
-//                    line.append(",").append(ingredient);
-//                }
-//                writer.write(line.toString());
-//                writer.newLine();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    @FXML
-    private Button backButton;
-
 
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
-
-        // Add stylesheet to the new scene
-        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
-
+        scene.getStylesheets().add(IngredientTrackerApplication.class.getResource("FormStyles.css").toExternalForm());
         stage.setScene(scene);
-    }
-
-    private void loadRecipesFromFile() {
-//        Path path = Paths.get(RECIPE_FILE);
-//        if (Files.exists(path)) {
-//            try (BufferedReader reader = Files.newBufferedReader(path)) {
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    String[] parts = line.split(",");
-//                    if (parts.length > 0) {
-//                        Recipe recipe = new Recipe(parts[0]);
-//                        for (int i = 1; i < parts.length; i++) {
-//                            recipe.addIngredient(parts[i]);
-//                        }
-//                        recipes.add(recipe);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 }
