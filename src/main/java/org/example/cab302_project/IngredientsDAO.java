@@ -65,6 +65,28 @@ public class IngredientsDAO {
         return ingredients;
     }
 
+    // Get Ingredients if quick access is true
+    public List<Ingredient> getQuickAccessIngredients() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Ingredients WHERE quick_access = ?");
+            statement.setBoolean(1, true);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                ingredients.add(new Ingredient(
+                        rs.getInt("id"),
+                        rs.getString("Ingredient"),
+                        rs.getInt("Quantity"),
+                        rs.getInt("MinQuantity"),
+                        rs.getBoolean("quick_access")
+                ));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error while fetching quick access ingredients: " + ex.getMessage());
+        }
+        return ingredients;
+    }
+
     public Ingredient getById(int id) {
         try {
             PreparedStatement getingredient = connection.prepareStatement("SELECT * FROM Ingredients WHERE id = ?");
@@ -86,7 +108,7 @@ public class IngredientsDAO {
     }
 
     //update
-    public void updateContact(Ingredient ingredient) {
+    public void update(Ingredient ingredient) {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE ingredient SET Ingredient = ?, Quantity = ?, MinQuantity = ?, quick_access = ? WHERE id = ?");
             statement.setString(1, ingredient.getIngredient());

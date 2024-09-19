@@ -71,6 +71,8 @@ public class NewIngredientController {
             Ingredient newIngredient = new Ingredient(ingredientNameValue, quantityValue, minQuantityValue, isQuickAccess);
             ingredientsDAO.Insert(newIngredient);
 
+            ManageIngredientsController.ingredientList.add(newIngredient);
+
             showAlert(Alert.AlertType.INFORMATION, "Success", "Ingredient added successfully.");
             clearFields();
 
