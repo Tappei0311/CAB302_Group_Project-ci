@@ -21,3 +21,24 @@
 
         -fx-effect: dropshadow(gaussian, black, 2, 2, 2, 2);
 }
+
+/*  button colors */
+.edit-button {
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
+}
+
+.new-recipe-button {
+    -fx-background-color: #00d970;
+    -fx-text-fill: white;
+}
+
+.delete-button {
+    -fx-background-color: #ff5c5c;
+    -fx-text-fill: white;
+}
+
+.redirect-button {
+    -fx-background-color: #8a2be2;
+    -fx-text-fill: white;
+}

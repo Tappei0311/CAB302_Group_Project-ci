@@ -14,6 +14,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NewRecipeController {
 
@@ -34,6 +35,11 @@ public class NewRecipeController {
 
     @FXML
     private Button updateIngredientButton;
+
+    @FXML
+    private Button backButton;
+
+
 
     private ObservableList<RecipieIngredients> ingredients = FXCollections.observableArrayList();
     private int editingIngredientIndex = -1;
@@ -150,7 +156,9 @@ public class NewRecipeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) recipeName.getScene().getWindow();
-                Scene scene = new Scene(root);
+                Scene scene = new Scene(root, 650, 420);
+                // Add stylesheet to the new scene
+                scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
                 stage.setScene(scene);
                 stage.show();
             } else {
@@ -161,6 +169,18 @@ public class NewRecipeController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Recipe name and ingredients must not be empty.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    protected void backButton() throws IOException {
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-recipes.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 650, 420);
+
+        // Add stylesheet to the new scene
+        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
+        stage.setTitle("Ingredient Tracker");
+        stage.setScene(scene);
     }
 
 }

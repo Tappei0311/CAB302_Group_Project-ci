@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 
 public class ManageRecipesController {
 
@@ -95,7 +96,10 @@ public class ManageRecipesController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 650, 420);
+        stage.setTitle("New Recipes");
+        // Add stylesheet to the new scene
+        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -110,7 +114,10 @@ public class ManageRecipesController {
             controller.setRecipe(selectedRecipe);
 
             Stage stage = (Stage) editRecipeButton.getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 650, 420);
+            stage.setTitle("Edit Recipes");
+            // Add stylesheet to the new scene
+            scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
             stage.setScene(scene);
             stage.show();
         }
@@ -138,6 +145,7 @@ public class ManageRecipesController {
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
         scene.getStylesheets().add(IngredientTrackerApplication.class.getResource("FormStyles.css").toExternalForm());
+        stage.setTitle("Ingredient Tracker");
         stage.setScene(scene);
     }
 }
