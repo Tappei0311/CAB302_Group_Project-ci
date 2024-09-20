@@ -16,8 +16,9 @@ public class IngredientTrackerApplication extends Application {
     public static final String TITLE = "Ingredient Tracker";
     public static final int WIDTH = 340;
     public static final int HEIGHT = 450;
-IngredientsDAO ingredientsDAO = new IngredientsDAO();
-RecipeDAO recipeDAO = new RecipeDAO();
+    private IngredientsDAO ingredientsDAO = new IngredientsDAO();
+    private RecipeDAO recipeDAO = new RecipeDAO();
+    private UserDAO userDAO = new UserDAO();
 //    // Background and text colouring constants
 //    public static final String BACKGROUND_STYLING = "-fx-background-color: #2B2B2B;";
 //    public static final String TEXT_STYLING = "-fx-text-fill: white;";
@@ -27,14 +28,18 @@ RecipeDAO recipeDAO = new RecipeDAO();
         ingredientsDAO.createTable();
         recipeDAO.createRecipeTable();
         recipeDAO.createRecipeIngredientTable();
+        userDAO.createUserTable();
     }
 
 
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("menu-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
+        // Get the LoginController and set the UserDAO
+        LoginController loginController = fxmlLoader.getController();
+        loginController.setUserDAO(userDAO);
 
 //        // Apply background color to the root pane
 //        Pane rootPane = (Pane) scene.getRoot();
@@ -52,6 +57,7 @@ RecipeDAO recipeDAO = new RecipeDAO();
         stage.show();
 
         Connection connection = DatabaseConnection.getInstance();
+
 
     }
 

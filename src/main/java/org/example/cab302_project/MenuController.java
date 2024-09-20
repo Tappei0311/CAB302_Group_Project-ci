@@ -2,9 +2,12 @@ package org.example.cab302_project;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -23,6 +26,11 @@ public class MenuController {
 
     @FXML
     private Button manageRecipesButton;
+
+    @FXML
+    private Button logoutButton;
+
+    private UserDAO userDAO;
 
 
 
@@ -79,6 +87,45 @@ public class MenuController {
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
 
         stage.setScene(scene);
+    }
+
+    // Setter for UserDAO
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    @FXML
+    private void handleLogout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You're about to logout");
+        alert.setContentText("Are you sure you want to logout?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            try {
+                // Load the login view
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/login.fxml"));
+                Parent loginView = loader.load();
+
+                // Get the LoginController and set the UserDAO
+                LoginController loginController = loader.getController();
+                loginController.setUserDAO(this.userDAO);
+
+                // Set the login scene
+                Scene loginScene = new Scene(loginView, IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+
+                // Apply the CSS
+                loginScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/org/example/cab302_project/FormStyles.css")).toExternalForm());
+
+                Stage stage = (Stage) recommendRecipeButton.getScene().getWindow();
+                stage.setScene(loginScene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception (e.g., show an error alert)
+            }
+        }
+
     }
 
 

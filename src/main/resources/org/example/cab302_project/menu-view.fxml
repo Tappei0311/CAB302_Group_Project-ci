@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
+
 <VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.cab302_project.MenuController">
   <padding>
@@ -14,8 +14,7 @@
   <!-- Title for Menu -->
   <Label text="Ingredient Tracker" styleClass="title-label" style=" -fx-padding: 50;" />
 
-
-<!-- Buttons -->
+  <!-- Buttons -->
   <VBox alignment="CENTER" spacing="30" prefWidth="300">
     <Button fx:id ="recommendRecipeButton"
             text="Recommend Recipe"
@@ -29,7 +28,6 @@
             onAction="#manageIngredientsButton"
     />
 
-    <!-- Updated Manage Recipes button -->
     <Button fx:id="manageRecipesButton"
             text="Manage Recipes"
             style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
@@ -40,6 +38,13 @@
             text="Generate Shopping List"
             style="-fx-background-color: #888888; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
             onAction="#ShoppingListButton"
+    />
+
+    <!-- New Logout Button -->
+    <Button fx:id="logoutButton"
+            text="Logout"
+            style="-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 14;" prefWidth="200"
+            onAction="#handleLogout"
     />
   </VBox>
 
