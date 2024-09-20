@@ -51,12 +51,14 @@ public class EditRecipeController {
         this.recipe = recipe;
         recipeName.setText(recipe.getName());
         loadRecipeIngredients();
+        setupIngredientListView();
     }
 
     @FXML
     public void initialize() {
         quantityComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
         loadIngredients();
+        setupIngredientListView();
     }
 
     private void loadIngredients() {
@@ -67,6 +69,7 @@ public class EditRecipeController {
     private void loadRecipeIngredients() {
         List<RecipieIngredients> recipeIngredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
         ingredientList.setItems(FXCollections.observableArrayList(recipeIngredients));
+        System.out.println("Loaded " + recipeIngredients.size() + " ingredients for recipe: " + recipe.getName());
     }
 
     private void setupIngredientListView() {
@@ -151,8 +154,13 @@ public class EditRecipeController {
             ingredient.setAmount(Integer.parseInt(updatedQuantity));
 
             // Update ingredient in database
-            // This method needs to be implemented in RecipeDAO
-            // recipeDAO.updateRecipeIngredient(ingredient);
+            boolean updated = recipeDAO.updateRecipeIngredient(ingredient);
+
+            if (updated) {
+                System.out.println("Successfully updated ingredient: " + ingredient.getIngredient().getIngredient() + " (Qty: " + ingredient.getAmount() + ")");
+            } else {
+                System.out.println("Failed to update ingredient");
+            }
 
             loadRecipeIngredients();
             ingredientComboBox.setValue(null);

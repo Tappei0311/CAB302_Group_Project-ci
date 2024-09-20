@@ -193,4 +193,21 @@ public class RecipeDAO {
         }
     }
 
+    public boolean updateRecipeIngredient(RecipieIngredients ingredient) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE RecipeIngredients SET Ingredientid = ?, ingredientUsage = ? WHERE id = ?"
+            );
+            statement.setInt(1, ingredient.getIngredient().getId());
+            statement.setInt(2, ingredient.getAmount());
+            statement.setInt(3, ingredient.getId());
+
+            int affectedRows = statement.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException ex) {
+            System.err.println("Error updating recipe ingredient: " + ex.getMessage());
+            return false;
+        }
+    }
+
 }
