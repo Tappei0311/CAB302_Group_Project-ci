@@ -13,9 +13,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
-    @FXML private Label messageLabel;
+    @FXML
+    public TextField usernameField;
+    @FXML
+    public PasswordField passwordField;
+    @FXML
+    public Label messageLabel;
 
     private UserDAO userDAO;
 
@@ -24,7 +27,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleLogin() {
+    public void handleLogin() {
         if (userDAO == null) {
             messageLabel.setText("Error: UserDAO not initialized");
             return;
