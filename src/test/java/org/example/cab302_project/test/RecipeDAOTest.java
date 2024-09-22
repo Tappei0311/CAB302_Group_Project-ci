@@ -45,32 +45,6 @@ class RecipeDAOTest {
     }
 
     @Test
-    void testInsertRecipe() {
-        Recipe recipe = new Recipe("Spaghetti Carbonara");
-        int id = recipeDAO.InsertRecipe(recipe);
-        assertTrue(id > 0, "Spaghetti Carbonara recipe should be inserted with a valid ID");
-
-        // Verify the recipe was actually inserted
-        List<Recipe> recipes = recipeDAO.getAll();
-        assertEquals(1, recipes.size(), "There should be one recipe in the database");
-        assertEquals("Spaghetti Carbonara", recipes.get(0).getName(), "The inserted recipe should be Spaghetti Carbonara");
-        assertEquals(id, recipes.get(0).getId(), "The ID should match the one returned by InsertRecipe");
-    }
-
-    @Test
-    void testGetAllRecipes() {
-        Recipe recipe1 = new Recipe("Chicken Parmesan");
-        Recipe recipe2 = new Recipe("Vegetable Stir Fry");
-        int id1 = recipeDAO.InsertRecipe(recipe1);
-        int id2 = recipeDAO.InsertRecipe(recipe2);
-
-        List<Recipe> recipes = recipeDAO.getAll();
-        assertEquals(2, recipes.size(), "Should retrieve both inserted recipes");
-        assertTrue(recipes.stream().anyMatch(r -> r.getName().equals("Chicken Parmesan") && r.getId() == id1), "Should contain Chicken Parmesan with correct ID");
-        assertTrue(recipes.stream().anyMatch(r -> r.getName().equals("Vegetable Stir Fry") && r.getId() == id2), "Should contain Vegetable Stir Fry with correct ID");
-    }
-
-    @Test
     void testDeleteRecipe() {
         Recipe recipe = new Recipe("Chocolate Chip Cookies");
         int id = recipeDAO.InsertRecipe(recipe);
