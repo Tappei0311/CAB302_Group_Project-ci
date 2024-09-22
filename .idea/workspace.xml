@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientsTest2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,20 +20,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Kyle_UnitTests" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "idrcmatre"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;idrcmatre&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/KyleReeves/CAB302_Group_Project.git",
-    "accountId": "0398992f-fb6e-48bc-ae6a-2435ed000351"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/KyleReeves/CAB302_Group_Project.git&quot;,
+    &quot;accountId&quot;: &quot;0398992f-fb6e-48bc-ae6a-2435ed000351&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -46,7 +50,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.IngredientTrackerApplication.executor": "Run",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "KyleUnitTests",
+    "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.4586207"
