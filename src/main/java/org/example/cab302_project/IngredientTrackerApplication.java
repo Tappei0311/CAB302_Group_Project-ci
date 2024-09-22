@@ -28,7 +28,7 @@ public class IngredientTrackerApplication extends Application {
         ingredientsDAO.createTable();
         recipeDAO.createRecipeTable();
         recipeDAO.createRecipeIngredientTable();
-        userDAO.createUserTable();
+        userDAO.createUserTable(); //create Tables for Users
     }
 
 
