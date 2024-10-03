@@ -34,9 +34,14 @@ public class ManageRecipesController {
     @FXML
     private Button backButton;
 
+    @FXML
+    private Button addIngredientButton;
+
     private RecipeDAO recipeDAO;
     private IngredientsDAO ingredientsDAO;
 
+
+    // Initialize method: Load recipes and set up listeners
     public ManageRecipesController() {
         recipeDAO = new RecipeDAO();
         ingredientsDAO = new IngredientsDAO();
@@ -58,7 +63,7 @@ public class ManageRecipesController {
             }
         });
     }
-
+    // Load all recipes from the database
     private void loadRecipes() {
         List<Recipe> recipes = recipeDAO.getAll();
         ObservableList<Recipe> observableRecipes = FXCollections.observableArrayList(recipes);
@@ -69,6 +74,7 @@ public class ManageRecipesController {
         }
     }
 
+    // Load ingredients for a selected recipe
     private void loadIngredientsForRecipe(Recipe recipe) {
         List<RecipieIngredients> ingredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
         ingredientListView.getItems().clear();
@@ -78,18 +84,7 @@ public class ManageRecipesController {
         System.out.println("Loaded " + ingredients.size() + " ingredients for recipe: " + recipe.getName());
     }
 
-
-
-    private void loadIngredients(Recipe recipe) {
-        // This method needs to be implemented in RecipeDAO
-        // List<RecipieIngredients> recipeIngredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
-        // ObservableList<String> ingredients = FXCollections.observableArrayList();
-        // for (RecipieIngredients ri : recipeIngredients) {
-        //     ingredients.add(ri.getIngredient().getIngredient() + " (Qty: " + ri.getAmount() + ")");
-        // }
-        // ingredientListView.setItems(ingredients);
-    }
-
+    // Handle new recipe button click
     @FXML
     public void handleNewRecipeButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-recipe.fxml"));
@@ -104,6 +99,7 @@ public class ManageRecipesController {
         stage.show();
     }
 
+    // Handle edit recipe button click
     @FXML
     public void handleEditRecipeClick(ActionEvent event) throws IOException {
         Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
@@ -123,6 +119,7 @@ public class ManageRecipesController {
         }
     }
 
+    // Handle delete recipe button
     @FXML
     public void handleDeleteRecipeClick(ActionEvent event) {
         Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
@@ -139,6 +136,34 @@ public class ManageRecipesController {
         }
     }
 
+    // Opens a window to add a new ingredient
+    @FXML
+    public void handleAddIngredientClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/new-ingredient-view.fxml"));
+        Parent root = loader.load();
+
+        NewIngredientController newIngredientController = loader.getController();
+        newIngredientController.setManageRecipesController(this);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        scene.getStylesheets().add(IngredientTrackerApplication.class.getResource("FormStyles.css").toExternalForm());
+        stage.setTitle("Add New Ingredient");
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        refreshIngredients();
+    }
+
+    // Refreshes the ingredient list for the selected recipe
+    public void refreshIngredients() {
+        Recipe selectedRecipe = recipeList.getSelectionModel().getSelectedItem();
+        if (selectedRecipe != null) {
+            loadIngredientsForRecipe(selectedRecipe);
+        }
+    }
+
+    // Navigates back to the main menu
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();

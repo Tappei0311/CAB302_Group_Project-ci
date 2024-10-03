@@ -4,9 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Constructor: Initialize database connection
 public class IngredientsDAO {
     private Connection connection;
 
+
+    // Create the Ingredients table if it doesn't exist
     public IngredientsDAO() {
         connection = DatabaseConnection.getInstance();
     }
@@ -26,7 +29,7 @@ public class IngredientsDAO {
             System.err.println(ex);
         }
     }
-    //create
+    // Insert a new ingredient into the database
     public void Insert(Ingredient ingredients) {
         try {
             PreparedStatement insertIngredient = connection.prepareStatement(
@@ -42,7 +45,7 @@ public class IngredientsDAO {
         }
     }
 
-    //read
+    // Retrieve all ingredients from the database
     public List<Ingredient> getAll() {
         List<Ingredient> ingredients = new ArrayList<>();
         try {
@@ -86,7 +89,7 @@ public class IngredientsDAO {
         }
         return ingredients;
     }
-
+    // Retrieve an ingredient by its ID
     public Ingredient getById(int id) {
         try {
             PreparedStatement getingredient = connection.prepareStatement("SELECT * FROM Ingredients WHERE id = ?");
@@ -107,32 +110,59 @@ public class IngredientsDAO {
         return null;
     }
 
-    //update
+    // Update an existing ingredient in the database
     public void update(Ingredient ingredient) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE ingredient SET Ingredient = ?, Quantity = ?, MinQuantity = ?, quick_access = ? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE Ingredients SET Ingredient = ?, Quantity = ?, MinQuantity = ?, quick_access = ? WHERE id = ?"
+            );
             statement.setString(1, ingredient.getIngredient());
             statement.setInt(2, ingredient.getQuantity());
             statement.setInt(3, ingredient.getMinQuantity());
             statement.setBoolean(4, ingredient.isQuick_access());
             statement.setInt(5, ingredient.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                System.err.println("No rows updated for ingredient with ID: " + ingredient.getId());
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating ingredient: " + e.getMessage());
             e.printStackTrace();
         }
     }
-//delete
-public void delete(Ingredient ingredient) {
-    try {
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM Ingredient WHERE id = ?");
-        statement.setInt(1, ingredient.getId());
-        statement.executeUpdate();
-    } catch (Exception e) {
-        e.printStackTrace();
 
+    // Check if an ingredient with the given name already exists
+    public boolean ingredientExists(String ingredientName) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT COUNT(*) FROM Ingredients WHERE LOWER(Ingredient) = LOWER(?)"
+            );
+            statement.setString(1, ingredientName);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error checking if ingredient exists: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
-}
+    // Delete an ingredient from the database
+    public boolean delete(Ingredient ingredient) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM Ingredients WHERE id = ?");
+            statement.setInt(1, ingredient.getId());
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error deleting ingredient: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    // Close the database connection
     public void close() {
         try {
             connection.close();

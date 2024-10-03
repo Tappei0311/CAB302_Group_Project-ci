@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.cab302_project.EditIngredientController"
+            style="-fx-background-color: #2B2B2B; -fx-padding: 20;">
+
+    <VBox spacing="10" alignment="CENTER">
+        <Label text="Edit Ingredient" style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+        <GridPane vgap="10" hgap="10">
+            <Label text="Name:" style="-fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="ingredientNameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Quantity:" style="-fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="quantityField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Min Quantity:" style="-fx-text-fill: white;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="minQuantityField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <CheckBox fx:id="quickAccessCheckBox" text="Quick Access" style="-fx-text-fill: white;"
+                      GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+        </GridPane>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="saveButton" text="Save" onAction="#handleSave"
+                    style="-fx-background-color: #00d970; -fx-text-fill: white;"/>
+            <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancel"
+                    style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

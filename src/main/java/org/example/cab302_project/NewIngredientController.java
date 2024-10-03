@@ -31,11 +31,14 @@ public class NewIngredientController {
     private Button createButton;
 
     private IngredientsDAO ingredientsDAO;
+    private ManageIngredientsController manageIngredientsController;
+    private ManageRecipesController manageRecipesController;
 
     public NewIngredientController() {
         ingredientsDAO = new IngredientsDAO();
     }
 
+    // Sets up input validation for quantity fields
     @FXML
     public void initialize() {
         // Existing input validation code
@@ -52,8 +55,18 @@ public class NewIngredientController {
         });
     }
 
+    // Set the parent controllers
+    public void setManageIngredientsController(ManageIngredientsController controller) {
+        this.manageIngredientsController = controller;
+    }
+    //Set the parent controllers
+    public void setManageRecipesController(ManageRecipesController controller) {
+        this.manageRecipesController = controller;
+    }
+
+    // Handles the logic for adding a new ingredient
     @FXML
-    public void addIngredient(ActionEvent actionEvent) {
+    public void addIngredient() {
         String ingredientNameValue = ingredientName.getText().trim();
         String quantityString = quantity.getText().trim();
         String minQuantityString = minQuantity.getText().trim();
@@ -64,6 +77,11 @@ public class NewIngredientController {
             return;
         }
 
+        if (ingredientsDAO.ingredientExists(ingredientNameValue)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "An ingredient with this name already exists.");
+            return;
+        }
+
         try {
             int quantityValue = Integer.parseInt(quantityString);
             int minQuantityValue = Integer.parseInt(minQuantityString);
@@ -71,11 +89,17 @@ public class NewIngredientController {
             Ingredient newIngredient = new Ingredient(ingredientNameValue, quantityValue, minQuantityValue, isQuickAccess);
             ingredientsDAO.Insert(newIngredient);
 
-            ManageIngredientsController.ingredientList.add(newIngredient);
-
             showAlert(Alert.AlertType.INFORMATION, "Success", "Ingredient added successfully.");
-            clearFields();
 
+            if (manageIngredientsController != null) {
+                manageIngredientsController.loadIngredients();
+                manageIngredientsController.loadQuickAccessIngredients();
+            }
+            if (manageRecipesController != null) {
+                manageRecipesController.refreshIngredients();
+            }
+
+            closeWindow();
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Quantity and Minimum Quantity must be valid numbers.");
         } catch (Exception e) {
@@ -83,6 +107,7 @@ public class NewIngredientController {
         }
     }
 
+    // Displays alert messages to the user
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -91,21 +116,15 @@ public class NewIngredientController {
         alert.showAndWait();
     }
 
-    private void clearFields() {
-        ingredientName.clear();
-        quantity.clear();
-        minQuantity.clear();
-        quickAccess.setSelected(false);
+    // Handle closing the add ingredient window
+    @FXML
+    protected void backButton() {
+        closeWindow();
     }
 
-    @FXML
-    protected void backButton() throws IOException {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("manage-ingredients-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
-
-        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
-        stage.setTitle("Ingredient Tracker");
-        stage.setScene(scene);
+    // Handle closing the add ingredient window
+    private void closeWindow() {
+        Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
     }
 }

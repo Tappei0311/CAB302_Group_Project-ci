@@ -39,11 +39,11 @@ public class NewRecipeController {
     @FXML
     private Button backButton;
 
-
-
+    // ObservableList to hold recipe ingredients
     private ObservableList<RecipieIngredients> ingredients = FXCollections.observableArrayList();
+    // Index of the ingredient being edited
     private int editingIngredientIndex = -1;
-
+    // DAOs for database operations
     private RecipeDAO recipeDAO;
     private IngredientsDAO ingredientsDAO;
 
@@ -61,11 +61,13 @@ public class NewRecipeController {
         loadIngredients();
     }
 
+    // Load all ingredients into the ingredient combo box
     private void loadIngredients() {
         List<Ingredient> allIngredients = ingredientsDAO.getAll();
         ingredientComboBox.setItems(FXCollections.observableArrayList(allIngredients));
     }
 
+    // Set up the ingredient list view with custom cell factory
     private void setupIngredientListView() {
         ingredientList.setCellFactory(new Callback<ListView<RecipieIngredients>, ListCell<RecipieIngredients>>() {
             @Override
@@ -106,6 +108,7 @@ public class NewRecipeController {
         });
     }
 
+    // Handle adding a new ingredient to the recipe
     @FXML
     public void handleAddIngredientClick(ActionEvent actionEvent) {
         Ingredient selectedIngredient = ingredientComboBox.getValue();
@@ -119,6 +122,7 @@ public class NewRecipeController {
         }
     }
 
+    // Handle updating an existing ingredient in the recipe
     @FXML
     public void handleUpdateIngredientClick(ActionEvent actionEvent) {
         Ingredient updatedIngredient = ingredientComboBox.getValue();
@@ -138,6 +142,7 @@ public class NewRecipeController {
         }
     }
 
+    // Handle creating a new recipe
     public void handleCreateRecipeClick(ActionEvent actionEvent) throws IOException {
         String recipeText = recipeName.getText();
 
@@ -171,6 +176,7 @@ public class NewRecipeController {
         }
     }
 
+    // Handle back button click
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();

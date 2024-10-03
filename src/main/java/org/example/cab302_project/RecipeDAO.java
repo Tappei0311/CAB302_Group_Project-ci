@@ -11,6 +11,7 @@ public class RecipeDAO {
         connection = DatabaseConnection.getInstance();
     }
 
+    // Create Recipe table if it doesn't exist
     public void createRecipeTable() {
         try {
             Statement createTable = connection.createStatement();
@@ -25,6 +26,7 @@ public class RecipeDAO {
         }
     }
 
+    // Create RecipeIngredients table if it doesn't exist
     public void createRecipeIngredientTable() {
         try {
             Statement createTable = connection.createStatement();
@@ -43,7 +45,7 @@ public class RecipeDAO {
         }
     }
 
-    //create
+    // Insert a new recipe into the database
     public int InsertRecipe(Recipe recipe) {
         try {
             PreparedStatement insertRecipe = connection.prepareStatement(
@@ -72,6 +74,7 @@ public class RecipeDAO {
         return -1;
     }
 
+    // Retrieve all recipes from the database
     public List<Recipe> getAll() {
         List<Recipe> recipes = new ArrayList<>();
         try {
@@ -91,6 +94,7 @@ public class RecipeDAO {
         return recipes;
     }
 
+    // Insert a new recipe ingredient into the database
     public void InsertRecipeIngredient(RecipieIngredients ingredient) {
         try {
             PreparedStatement insertRecipeIngredient = connection.prepareStatement(
@@ -111,7 +115,7 @@ public class RecipeDAO {
         }
     }
 
-
+    // Retrieve all ingredients for a specific recipe
     public List<RecipieIngredients> getIngredientsForRecipe(int recipeId) {
         List<RecipieIngredients> ingredients = new ArrayList<>();
         try {
@@ -148,10 +152,7 @@ public class RecipeDAO {
         return ingredients;
     }
 
-
-
-
-
+    // Delete a recipe from the database
     public boolean deleteRecipe(Recipe recipe) {
         try {
             connection.setAutoCommit(false);
@@ -183,6 +184,8 @@ public class RecipeDAO {
             }
         }
     }
+
+    // Delete a recipe ingredient from the database
     public void deleteRecipeIngredient(RecipieIngredients Ingredient) {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM RecipeIngredients WHERE id = ?");
@@ -193,6 +196,7 @@ public class RecipeDAO {
         }
     }
 
+    // Update a recipe ingredient in the database
     public boolean updateRecipeIngredient(RecipieIngredients ingredient) {
         try {
             PreparedStatement statement = connection.prepareStatement(

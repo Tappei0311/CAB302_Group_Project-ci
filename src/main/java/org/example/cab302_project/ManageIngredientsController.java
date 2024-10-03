@@ -4,9 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,45 +30,62 @@ public class ManageIngredientsController {
     private TableView<Ingredient> ingredientsTable;
 
     @FXML
-    private TableColumn<Ingredient, Boolean> checkboxColumn;
+    private TableColumn<Ingredient, String> ingredientColumn;
 
     @FXML
-    private TableColumn<Ingredient, String> ingredientColumn;
+    private TableColumn<Ingredient, Integer> quantityColumn;
+
+    @FXML
+    private TableColumn<Ingredient, Integer> minQuantityColumn;
+
+    @FXML
+    private TableColumn<Ingredient, Boolean> quickAccessColumn;
+
+
+    @FXML
+    private TableColumn<Ingredient, Boolean> checkboxColumn;
 
     public static ObservableList<Ingredient> ingredientList = FXCollections.observableArrayList();
 
     private IngredientsDAO ingredientsDAO;
 
+
     public ManageIngredientsController() {
         ingredientsDAO = new IngredientsDAO();
     }
 
+    // Initialize method: Set up table columns and load data
     @FXML
     public void initialize() {
-        // ingredientColumn
-        ingredientColumn.setCellValueFactory(new PropertyValueFactory<>("ingredient"));
-
-        // checkboxColumn
-        checkboxColumn.setCellFactory(tc -> new CheckBoxTableCell<>());
-
-        loadIngredients(); // Load ingredients list
-        ingredientsTable.setItems(ingredientList); // Connect TableView to the list
-
-        ingredientsTable.refresh();
+        setupTableColumns();
+        loadIngredients();
+        loadQuickAccessIngredients();
     }
 
-    // Load ingredients list from the database
-    private void loadIngredients() {
+    // Set up table columns with appropriate cell value factories
+    private void setupTableColumns() {
+        ingredientColumn.setCellValueFactory(new PropertyValueFactory<>("ingredient"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    }
+
+    // Load all ingredients from the database and populate the table
+    public void loadIngredients() {
         try {
             ingredientList.clear();
-            ingredientList.addAll(ingredientsDAO.getAll());
+            List<Ingredient> ingredients = ingredientsDAO.getAll();
+            System.out.println("Loaded " + ingredients.size() + " ingredients from database");
+            ingredientList.addAll(ingredients);
+            ingredientsTable.setItems(ingredientList);
+            System.out.println("Table items set, size: " + ingredientsTable.getItems().size());
         } catch (Exception e) {
+            System.err.println("Error loading ingredients: " + e.getMessage());
+            e.printStackTrace();
             showError("Error while loading ingredients", e.getMessage());
         }
     }
 
     // Method to dynamically load Quick Access items
-    private void loadQuickAccessIngredients() {
+    public void loadQuickAccessIngredients() {
         VBox quickAccessVBox = new VBox(10);
         List<Ingredient> quickAccessIngredients = ingredientsDAO.getQuickAccessIngredients();
 
@@ -100,7 +117,53 @@ public class ManageIngredientsController {
         quickAccessSection.getChildren().setAll(quickAccessVBox); // Add to section dynamically
     }
 
-    // Update ingredient quantity
+    // Handle the adding of a new ingredient
+    @FXML
+    protected void addIngredientButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(IngredientTrackerApplication.class.getResource("new-ingredient-view.fxml"));
+        Parent root = loader.load();
+
+        NewIngredientController newIngredientController = loader.getController();
+        newIngredientController.setManageIngredientsController(this);
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
+        scene.getStylesheets().add(IngredientTrackerApplication.class.getResource("FormStyles.css").toExternalForm());
+        stage.setTitle("Add New Ingredient");
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        loadIngredients();
+        loadQuickAccessIngredients();
+    }
+
+    // Handle the editing of a selected ingredient
+    @FXML
+    private void handleEditIngredient() {
+        Ingredient selectedIngredient = ingredientsTable.getSelectionModel().getSelectedItem();
+        if (selectedIngredient != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("edit-ingredient-view.fxml"));
+                Parent root = loader.load();
+
+                EditIngredientController editController = loader.getController();
+                editController.setIngredient(selectedIngredient);
+                editController.setManageIngredientsController(this);
+
+                Stage stage = new Stage();
+                stage.setTitle("Edit Ingredient");
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+
+            } catch (IOException e) {
+                showError("Error", "Could not open edit window: " + e.getMessage());
+            }
+        } else {
+            showError("No Selection", "Please select an ingredient to edit.");
+        }
+    }
+
+    // Update the quantity of an ingredient
     private void updateIngredientQuantity(Ingredient ingredient, int delta) {
 
         int newQuantity = ingredient.getQuantity() + delta;
@@ -115,7 +178,7 @@ public class ManageIngredientsController {
         updateTableView(ingredient);
     }
 
-    // Update table
+    // Update the table view for a specific ingredient
     private void updateTableView(Ingredient updatedIngredient) {
 
         for (Ingredient ingredient : ingredientList) {
@@ -128,62 +191,44 @@ public class ManageIngredientsController {
         ingredientsTable.refresh();
     }
 
-    // Retrieve and use ingredient information based on a specific ingredient's ID
-    public void viewIngredientDetails(int ingredientId) {
-        Ingredient ingredient = ingredientsDAO.getById(ingredientId);
-
-        if (ingredient != null) {
-            // Display ingredient information or show it in the UI TBD
-            System.out.println("Ingredient: " + ingredient.getIngredient());
-            System.out.println("Quantity: " + ingredient.getQuantity());
-            System.out.println("Min Quantity: " + ingredient.getMinQuantity());
-        } else {
-            System.out.println("Ingredient not found.");
-        }
-    }
-
-    // Delete selected ingredient
-    public void deleteSelectedIngredient(int id) {
-        Ingredient selectedIngredient = ingredientsTable.getSelectionModel().getSelectedItem();
-
-        if (selectedIngredient != null) {
-            ingredientsDAO.delete(selectedIngredient);
-            System.out.println("Ingredient with ID" + selectedIngredient.getId() + "deleted.");
-
-            // refresh table
-            loadAllIngredients();
-        } else {
-            showError("No selection", "Please select an ingredient to delete.");
-        }
-
-    }
-
+    // Handle the deletion of a selected ingredient
     @FXML
     protected void handleDeleteSelected() {
-
         Ingredient selectedIngredient = ingredientsTable.getSelectionModel().getSelectedItem();
-
         if (selectedIngredient != null) {
-            // Call the delete method using the ingredient ID
-            deleteSelectedIngredient(selectedIngredient.getId());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Ingredient");
+            alert.setHeaderText("Are you sure you want to delete this ingredient?");
+            alert.setContentText(selectedIngredient.getIngredient());
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    boolean deleted = ingredientsDAO.delete(selectedIngredient);
+                    if (deleted) {
+                        ingredientList.remove(selectedIngredient);
+                        loadIngredients(); // Refresh the table
+                        loadQuickAccessIngredients(); // Refresh quick access section
+                        showInfo("Ingredient Deleted", "The ingredient has been successfully deleted.");
+                    } else {
+                        showError("Delete Failed", "Failed to delete the ingredient. Please try again.");
+                    }
+                }
+            });
         } else {
-            showError("No selection", "Please select an ingredient to delete.");
+            showError("No Selection", "Please select an ingredient to delete.");
         }
     }
 
-    // When the program exits or database operations are completed
-    public void closeDatabaseConnection() {
-        ingredientsDAO.close();
-        System.out.println("Database connection closed.");
+    // Display information message
+    private void showInfo(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    private void loadAllIngredients() {
-        ingredientList.clear();
-        ingredientList.addAll(ingredientsDAO.getAll());
-        ingredientsTable.refresh();
-    }
-
-
+    // Handle back button click
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -196,18 +241,6 @@ public class ManageIngredientsController {
         stage.setScene(scene);
     }
 
-    @FXML
-    protected void addIngredientButton() throws IOException {
-        Stage stage = (Stage) addIngredientButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("new-ingredient-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), IngredientTrackerApplication.WIDTH, IngredientTrackerApplication.HEIGHT);
-
-        // Add stylesheet to the new scene
-        scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
-
-        stage.setScene(scene);
-    }
-
     // Show error message
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -215,6 +248,18 @@ public class ManageIngredientsController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void loadAllIngredients() {
+        ingredientList.clear();
+        ingredientList.addAll(ingredientsDAO.getAll());
+        ingredientsTable.refresh();
+    }
+
+    // When the program exits or database operations are completed
+    public void closeDatabaseConnection() {
+        ingredientsDAO.close();
+        System.out.println("Database connection closed.");
     }
 
 }

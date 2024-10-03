@@ -35,18 +35,21 @@ public class EditRecipeController {
 
     @FXML
     private Button backButton;
-
+    // Recipe being edited
     private Recipe recipe;
+    // Index of the ingredient being edited
     private int editingIngredientIndex = -1;
-
+    // DAOs for database operations
     private RecipeDAO recipeDAO;
     private IngredientsDAO ingredientsDAO;
 
+    // Constructor: Initialize DAOs
     public EditRecipeController() {
         recipeDAO = new RecipeDAO();
         ingredientsDAO = new IngredientsDAO();
     }
 
+    // Set the recipe to be edited and populate UI
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
         recipeName.setText(recipe.getName());
@@ -54,6 +57,7 @@ public class EditRecipeController {
         setupIngredientListView();
     }
 
+    // Initialize method: Set up UI components and load data
     @FXML
     public void initialize() {
         quantityComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
@@ -61,17 +65,20 @@ public class EditRecipeController {
         setupIngredientListView();
     }
 
+    // Load all ingredients into the ingredient combo box
     private void loadIngredients() {
         List<Ingredient> allIngredients = ingredientsDAO.getAll();
         ingredientComboBox.setItems(FXCollections.observableArrayList(allIngredients));
     }
 
+    // Load ingredients for the current recipe
     private void loadRecipeIngredients() {
         List<RecipieIngredients> recipeIngredients = recipeDAO.getIngredientsForRecipe(recipe.getId());
         ingredientList.setItems(FXCollections.observableArrayList(recipeIngredients));
         System.out.println("Loaded " + recipeIngredients.size() + " ingredients for recipe: " + recipe.getName());
     }
 
+    // Set up the ingredient list view with custom cell factory
     private void setupIngredientListView() {
         ingredientList.setCellFactory(new Callback<ListView<RecipieIngredients>, ListCell<RecipieIngredients>>() {
             @Override
@@ -113,6 +120,7 @@ public class EditRecipeController {
         });
     }
 
+    // Handle adding a new ingredient to the recipe
     @FXML
     public void handleAddIngredient(ActionEvent event) {
         Ingredient selectedIngredient = ingredientComboBox.getValue();
@@ -127,12 +135,10 @@ public class EditRecipeController {
         }
     }
 
+    // Handle saving the edited recipe
     @FXML
     public void handleSaveRecipe(ActionEvent event) throws IOException {
         recipe.setName(recipeName.getText());
-        // Update recipe name in database
-        // This method needs to be implemented in RecipeDAO
-        // recipeDAO.updateRecipe(recipe);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/cab302_project/manage-recipes.fxml"));
         Parent root = loader.load();
@@ -144,6 +150,7 @@ public class EditRecipeController {
         stage.show();
     }
 
+    // Handle updating an existing ingredient in the recipe
     public void handleUpdateIngredient(ActionEvent actionEvent) {
         Ingredient updatedIngredient = ingredientComboBox.getValue();
         String updatedQuantity = quantityComboBox.getValue();
@@ -171,6 +178,7 @@ public class EditRecipeController {
         }
     }
 
+    // Handle back button click
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
