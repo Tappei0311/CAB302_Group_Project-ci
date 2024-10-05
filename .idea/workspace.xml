@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditIngredientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/edit-ingredient-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/Contact.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageRecipesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageRecipesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/NewIngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/NewIngredientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/NewRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/NewRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecipeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecipeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-ingredients-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-ingredients-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-recipes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-recipes.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,10 +45,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2mt5mjZmNkpv0yfqDVXjvORkC3Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -74,7 +59,7 @@
   "keyToString": {
     "Application.IngredientTrackerApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Vai",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Libraries",
