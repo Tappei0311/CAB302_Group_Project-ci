@@ -171,5 +171,27 @@ public class IngredientsDAO {
         }
     }
 
+    // Fetch ingredients that need restocking (current quantity < minimum quantity)
+    public List<Ingredient> getIngredientsForRestocking() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Ingredients WHERE Quantity < MinQuantity";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                ingredients.add(new Ingredient(
+                        rs.getInt("id"),
+                        rs.getString("Ingredient"),
+                        rs.getInt("Quantity"),
+                        rs.getInt("MinQuantity"),
+                        rs.getBoolean("quick_access")
+                ));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error fetching ingredients for restocking: " + ex.getMessage());
+        }
+        return ingredients;
+    }
+
 }
 

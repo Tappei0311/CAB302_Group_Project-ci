@@ -41,6 +41,12 @@ public class ManageIngredientsController {
     @FXML
     private TableColumn<Ingredient, Boolean> quickAccessColumn;
 
+    @FXML
+    private Button plusButton;
+
+    @FXML
+    private Button minusButton;
+
 
     @FXML
     private TableColumn<Ingredient, Boolean> checkboxColumn;
@@ -60,12 +66,24 @@ public class ManageIngredientsController {
         setupTableColumns();
         loadIngredients();
         loadQuickAccessIngredients();
+        setupButtonDisabling();
     }
 
     // Set up table columns with appropriate cell value factories
     private void setupTableColumns() {
         ingredientColumn.setCellValueFactory(new PropertyValueFactory<>("ingredient"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    }
+
+    private void setupButtonDisabling() {
+        plusButton.setDisable(true);
+        minusButton.setDisable(true);
+
+        ingredientsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            boolean disableButtons = (newSelection == null);
+            plusButton.setDisable(disableButtons);
+            minusButton.setDisable(disableButtons);
+        });
     }
 
     // Load all ingredients from the database and populate the table
@@ -216,6 +234,27 @@ public class ManageIngredientsController {
             });
         } else {
             showError("No Selection", "Please select an ingredient to delete.");
+        }
+    }
+
+    @FXML
+    private void handlePlusButton() {
+        updateSelectedIngredientQuantity(1);
+    }
+
+    @FXML
+    private void handleMinusButton() {
+        updateSelectedIngredientQuantity(-1);
+    }
+
+    private void updateSelectedIngredientQuantity(int delta) {
+        Ingredient selectedIngredient = ingredientsTable.getSelectionModel().getSelectedItem();
+        if (selectedIngredient != null) {
+            int newQuantity = Math.max(0, selectedIngredient.getQuantity() + delta);
+            selectedIngredient.setQuantity(newQuantity);
+            ingredientsDAO.update(selectedIngredient);
+            ingredientsTable.refresh();
+            loadQuickAccessIngredients(); // Refresh quick access section if needed
         }
     }
 

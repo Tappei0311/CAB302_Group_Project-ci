@@ -3,8 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.cab302_project.ManageIngredientsController"
@@ -29,6 +27,10 @@
         </HBox>
 
         <HBox alignment="CENTER" spacing="20.0">
+            <Button fx:id="minusButton" text="-" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"
+                    prefWidth="40" onAction="#handleMinusButton"/>
+            <Button fx:id="plusButton" text="+" style="-fx-background-color: #00d970; -fx-text-fill: white;"
+                    prefWidth="40" onAction="#handlePlusButton"/>
             <Button text="Edit" style="-fx-background-color: #3a78f0; -fx-text-fill: white;"
                     prefWidth="120" onAction="#handleEditIngredient"/>
             <Button text="Delete Selected" style="-fx-background-color: #ff5c5c; -fx-text-fill: white;"
