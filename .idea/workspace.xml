@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditIngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditIngredientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/Ingredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientTrackerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientTrackerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageRecipesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageRecipesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/MenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,18 +30,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "idrcmatre"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;idrcmatre&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/KyleReeves/CAB302_Group_Project.git",
-    "accountId": "c619c9ff-cb5b-4a7f-b78e-754e7fdf874c"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/KyleReeves/CAB302_Group_Project.git&quot;,
+    &quot;accountId&quot;: &quot;c619c9ff-cb5b-4a7f-b78e-754e7fdf874c&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
