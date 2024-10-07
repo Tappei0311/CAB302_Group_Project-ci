@@ -9,20 +9,24 @@ import java.io.IOException;
 import java.util.Objects;
 import java.sql.Connection;
 
-//test
+/**
+ * The main application class for the ingredient Tracker application
+ * This class extends the JavaFX Views, and serves as the entry point for the GUI and the program.
+ * It sets up the home page and initializes the necessary DAOs to interact with the database.
+ */
 public class IngredientTrackerApplication extends Application {
 
-    // Constants which will define the window title and size
+    // The constants which define the window title and size
     public static final String TITLE = "Ingredient Tracker";
     public static final int WIDTH = 340;
     public static final int HEIGHT = 450;
     private IngredientsDAO ingredientsDAO = new IngredientsDAO();
     private RecipeDAO recipeDAO = new RecipeDAO();
     private UserDAO userDAO = new UserDAO();
-//    // Background and text colouring constants
-//    public static final String BACKGROUND_STYLING = "-fx-background-color: #2B2B2B;";
-//    public static final String TEXT_STYLING = "-fx-text-fill: white;";
 
+    /**
+     * Initializes the application by initializing the appropriate DAOs to populate the necessary tables
+     */
     @Override
     public void init() {
         ingredientsDAO.createTable();
@@ -31,8 +35,13 @@ public class IngredientTrackerApplication extends Application {
         userDAO.createUserTable(); //create Tables for Users
     }
 
-
-
+    /**
+     * Starts the JavaFX application and sets the initial GUI/stage
+     * loads the login screen from FXML, sets the scene and intializes functionality from LoginController
+     *
+     * @param stage the primary stage for this application, where the login screen is set
+     * @throws IOException handles errors and exceptions when loading FXML files
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(IngredientTrackerApplication.class.getResource("login.fxml"));
@@ -41,15 +50,7 @@ public class IngredientTrackerApplication extends Application {
         LoginController loginController = fxmlLoader.getController();
         loginController.setUserDAO(userDAO);
 
-//        // Apply background color to the root pane
-//        Pane rootPane = (Pane) scene.getRoot();
-//        rootPane.setStyle(BACKGROUND_STYLING); // Set background color
-//
-//        // Apply text color globally
-//        scene.getRoot().lookupAll(".label").forEach(node -> node.setStyle(TEXT_STYLING));
-//        scene.getRoot().lookupAll(".button").forEach(node -> node.setStyle(TEXT_STYLING));
-
-        // Add the stylesheet to the scene
+        // Adding the stylesheet to the scene
         scene.getStylesheets().add(Objects.requireNonNull(IngredientTrackerApplication.class.getResource("FormStyles.css")).toExternalForm());
 
         stage.setTitle(TITLE);
@@ -61,6 +62,11 @@ public class IngredientTrackerApplication extends Application {
 
     }
 
+    /**
+     * The entry point and main method, which launches the JavaFX application
+     *
+     * @param args the command-line arguments (not used)
+     */
     public static void main(String[] args) {
         launch();
     }

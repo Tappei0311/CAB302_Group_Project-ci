@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditIngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditIngredientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/EditRecipeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/Ingredient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientTrackerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientTrackerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/IngredientsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ManageIngredientsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-ingredients-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/manage-ingredients-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/shopping-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/cab302_project/shopping-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,18 +37,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-    &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;idrcmatre&quot;
-    }
-    }</component>
-  <component name="GithubPullRequestsUISettings">{
-    &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/KyleReeves/CAB302_Group_Project.git&quot;,
-    &quot;accountId&quot;: &quot;0398992f-fb6e-48bc-ae6a-2435ed000351&quot;
-    }
-    }</component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "idrcmatre"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/KyleReeves/CAB302_Group_Project.git",
+    "accountId": "c619c9ff-cb5b-4a7f-b78e-754e7fdf874c"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -65,18 +66,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.IngredientTrackerApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging master",
-    "kotlin-language-version-configured": "true",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.4586207"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.IngredientTrackerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Creation-of-Java-Docs&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.4586207&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
