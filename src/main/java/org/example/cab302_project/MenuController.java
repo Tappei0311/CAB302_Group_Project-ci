@@ -12,6 +12,11 @@ import javafx.scene.control.ButtonType;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The controller class which manages the main menu view for the ingredient tracker app. This class primarily provides
+ * the functionality to go between the different menus, ensuring the styling and windows are appropriate per view transition.
+ * This also provides the functionality to log out
+ */
 public class MenuController {
 
 
@@ -33,7 +38,11 @@ public class MenuController {
     private UserDAO userDAO;
 
 
-
+    /**
+     * Redirects the user to the recommend recipe view
+     *
+     * @throws IOException handles error when loading recommend recipe fxml file
+     */
     @FXML
     protected void recommendRecipeButton() throws IOException {
 
@@ -48,6 +57,11 @@ public class MenuController {
         stage.setScene(scene);
     }
 
+    /**
+     * Redirects a user to the Manage Ingredients view
+     *
+     * @throws IOException handles errors if there is one loading the manage ingredients view
+     */
     @FXML
     protected void manageIngredientsButton() throws IOException {
         Stage stage = (Stage) manageIngredientsButton.getScene().getWindow();
@@ -61,7 +75,11 @@ public class MenuController {
         stage.setScene(scene);
     }
 
-
+    /**
+     * Redirects a user to the shopping list view
+     *
+     * @throws IOException handles errors in loading the shopping list fxml view
+     */
     @FXML
     protected void ShoppingListButton() throws IOException {
         Stage stage = (Stage) shoppingButton.getScene().getWindow();
@@ -76,6 +94,11 @@ public class MenuController {
         stage.setScene(scene);
     }
 
+    /**
+     * Redirects a user to the manage recipes view
+     *
+     * @throws IOException handles errors when loading the manage recipes fxml view
+     */
     @FXML
     protected void manageRecipesButton() throws IOException {
         Stage stage = (Stage) manageRecipesButton.getScene().getWindow();
@@ -89,11 +112,20 @@ public class MenuController {
         stage.setScene(scene);
     }
 
-    // Setter for UserDAO
+
+    /**
+     * Setter for the UserDao for this controller
+     *
+     * @param userDAO
+     */
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
+    /**
+     * Handles the logout process. Which displays a confirmation alert, and if confirmed redirects the user back
+     * To the login/registration view
+     */
     @FXML
     private void handleLogout() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
