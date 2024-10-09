@@ -9,12 +9,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Contains the logic for code written within the recommend recipe view
+ */
 public class RecommendRecipeController {
 
     @FXML
     private Button backButton;
 
 
+    /**
+     * Contains the logic for going back to the previous page
+     *
+     * @throws IOException handles errors when going back to the previous view
+     */
     @FXML
     protected void backButton() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
