@@ -6,9 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="c49651ca-97f0-401f-bd2b-75ba3774044a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecipieIngredients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecipieIngredients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecommendRecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/RecommendRecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/ShoppingListItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/cab302_project/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientsDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientsDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientsTest2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/IngredientsTest2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/RecipeDAOTest2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/cab302_project/test/UserDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,5 +89,16 @@
       <updated>1727883193896</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

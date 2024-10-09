@@ -6,9 +6,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * A small suite of tests which test the functionality of the IngredientsDAO class
+ * this includes testing adding, deleting and updating functionality to ensure that the DAO is functionally correct
+ *
+ */
 class IngredientsDAOTest {
     private IngredientsDAO ingredientsDAO;
 
+    /**
+     * Initialize IngredientsDAO to ensure the database tables exist before testing occurs,  also clears the ingredient
+     * table to ensure a fresh test environment
+     */
     @BeforeEach
     void setUp() {
         ingredientsDAO = new IngredientsDAO();
@@ -16,6 +25,9 @@ class IngredientsDAOTest {
         clearTable();  // Clear the table before each test
     }
 
+    /**
+     * Clears the ingredients table in the database to provide a clean slate for each test
+     */
     private void clearTable() {
         try {
             Connection connection = DatabaseConnection.getInstance();
@@ -25,6 +37,10 @@ class IngredientsDAOTest {
         }
     }
 
+    /**
+     * Test if an ingredient can be inserted into the database and verifies the ingredients name, quantity,
+     * Minimum quantity and if it has a quick access flag
+     */
     @Test
     void testInsertAndGetIngredient() {
         Ingredient ingredient = new Ingredient("Test Ingredient", 100, 10, false);
@@ -60,6 +76,9 @@ class IngredientsDAOTest {
         //assertTrue(updatedIngredient.isQuick_access());
     //}
 
+    /**
+     * Tests if an ingredient can be deleted from the database and verifies if the table is empty after deletion
+     */
     @Test
     void testDeleteIngredient() {
         Ingredient ingredient = new Ingredient("Ingredient to Delete", 100, 10, false);
