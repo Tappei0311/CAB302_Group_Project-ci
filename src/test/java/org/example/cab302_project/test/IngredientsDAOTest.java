@@ -14,17 +14,22 @@ import java.util.List;
  *
  */
 class IngredientsDAOTest {
+    private static Connection connection;
     private IngredientsDAO ingredientsDAO;
-    private Connection connection;
 
     /**
      * Initialize IngredientsDAO to ensure the database tables exist before testing occurs,  also clears the ingredient
      * table to ensure a fresh test environment
      */
+    @BeforeAll
+    static void setUpClass() throws SQLException {
+        DatabaseConnection.resetConnection();
+        connection = DatabaseConnection.getInstance();
+    }
+
     @BeforeEach
     void setUp() throws SQLException {
-        connection = DatabaseConnection.getInstance();
-        connection.setAutoCommit(false);  // Start transaction
+        connection.setAutoCommit(false);
         ingredientsDAO = new IngredientsDAO();
         ingredientsDAO.createTable();
         clearTable();
@@ -32,19 +37,21 @@ class IngredientsDAOTest {
 
     @AfterEach
     void tearDown() throws SQLException {
-        connection.rollback();  // Rollback changes after each test
+        connection.rollback();
         connection.setAutoCommit(true);
+    }
+
+    @AfterAll
+    static void tearDownClass() throws SQLException {
+        DatabaseConnection.closeConnection();
     }
 
     /**
      * Clears the ingredients table in the database to provide a clean slate for each test
      */
-    private void clearTable() {
-        try {
-            connection.createStatement().execute("DELETE FROM Ingredients");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+    private void clearTable() throws SQLException {
+        connection.createStatement().execute("DELETE FROM Ingredients");
     }
 
     /**
@@ -55,7 +62,6 @@ class IngredientsDAOTest {
     void testInsertAndGetIngredient() throws SQLException {
         Ingredient ingredient = new Ingredient("Test Ingredient", 100, 10, false);
         ingredientsDAO.Insert(ingredient);
-        connection.commit();  // Commit the transaction
 
         List<Ingredient> ingredients = ingredientsDAO.getAll();
         assertEquals(1, ingredients.size(), "Expected one ingredient after insertion");
@@ -95,13 +101,11 @@ class IngredientsDAOTest {
     void testDeleteIngredient() throws SQLException {
         Ingredient ingredient = new Ingredient("Ingredient to Delete", 100, 10, false);
         ingredientsDAO.Insert(ingredient);
-        connection.commit();  // Commit the insertion
 
         List<Ingredient> ingredients = ingredientsDAO.getAll();
         assertEquals(1, ingredients.size(), "Expected one ingredient after insertion");
 
         ingredientsDAO.delete(ingredients.get(0));
-        connection.commit();  // Commit the deletion
 
         ingredients = ingredientsDAO.getAll();
         assertTrue(ingredients.isEmpty(), "Expected no ingredients after deletion");
