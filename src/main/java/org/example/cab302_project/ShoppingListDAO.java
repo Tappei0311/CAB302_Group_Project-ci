@@ -17,7 +17,12 @@ public class ShoppingListDAO {
      * Constructor which initializes the database connected to create the lists
      */
     public ShoppingListDAO() {
-        connection = DatabaseConnection.getInstance();
+        try {
+            connection = DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            System.err.println("Error establishing database connection in UserDAO: " + e.getMessage());
+            e.printStackTrace();
+        }
         createShoppingListTables();
     }
 
