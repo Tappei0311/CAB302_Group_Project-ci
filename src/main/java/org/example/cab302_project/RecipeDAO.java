@@ -16,7 +16,12 @@ public class RecipeDAO {
      * Constructs RecipeDAO and intializes the database connection
      */
     public RecipeDAO() {
-        connection = DatabaseConnection.getInstance();
+        try {
+            connection = DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            System.err.println("Error establishing database connection in UserDAO: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**

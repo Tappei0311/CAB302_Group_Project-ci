@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.sql.Connection;
 
@@ -23,6 +24,7 @@ public class IngredientTrackerApplication extends Application {
     private IngredientsDAO ingredientsDAO = new IngredientsDAO();
     private RecipeDAO recipeDAO = new RecipeDAO();
     private UserDAO userDAO = new UserDAO();
+    private Connection connection;
 
     /**
      * Initializes the application by initializing the appropriate DAOs to populate the necessary tables
@@ -57,7 +59,12 @@ public class IngredientTrackerApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Connection connection = DatabaseConnection.getInstance();
+        try {
+            connection = DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            System.err.println("Error establishing database connection in UserDAO: " + e.getMessage());
+            e.printStackTrace();
+        }
 
 
     }
