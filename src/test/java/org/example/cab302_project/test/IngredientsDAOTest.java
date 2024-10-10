@@ -23,6 +23,7 @@ class IngredientsDAOTest {
      */
     @BeforeEach
     void setUp() throws SQLException {
+        DatabaseConnection.resetConnection(); // Ensure a fresh connection
         connection = DatabaseConnection.getInstance();
         connection.setAutoCommit(false);  // Start transaction
         ingredientsDAO = new IngredientsDAO();
@@ -32,19 +33,19 @@ class IngredientsDAOTest {
 
     @AfterEach
     void tearDown() throws SQLException {
-        connection.rollback();  // Rollback changes after each test
-        connection.setAutoCommit(true);
+        if (connection != null && !connection.isClosed()) {
+            connection.rollback();  // Rollback changes after each test
+            connection.setAutoCommit(true);
+        }
+        DatabaseConnection.closeConnection();
     }
 
     /**
      * Clears the ingredients table in the database to provide a clean slate for each test
      */
-    private void clearTable() {
-        try {
-            connection.createStatement().execute("DELETE FROM Ingredients");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+    private void clearTable() throws SQLException {
+        connection.createStatement().execute("DELETE FROM Ingredients");
     }
 
     /**
