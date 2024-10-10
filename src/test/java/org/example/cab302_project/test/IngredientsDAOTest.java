@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+
+
 /**
  * A small suite of tests which test the functionality of the IngredientsDAO class
  * this includes testing adding, deleting and updating functionality to ensure that the DAO is functionally correct
@@ -13,16 +15,25 @@ import java.util.List;
  */
 class IngredientsDAOTest {
     private IngredientsDAO ingredientsDAO;
+    private Connection connection;
 
     /**
      * Initialize IngredientsDAO to ensure the database tables exist before testing occurs,  also clears the ingredient
      * table to ensure a fresh test environment
      */
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException {
+        connection = DatabaseConnection.getInstance();
+        connection.setAutoCommit(false);  // Start transaction
         ingredientsDAO = new IngredientsDAO();
-        ingredientsDAO.createTable();  // This will ensure the table exists before each test
-        clearTable();  // Clear the table before each test
+        ingredientsDAO.createTable();
+        clearTable();
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        connection.rollback();  // Rollback changes after each test
+        connection.setAutoCommit(true);
     }
 
     /**
@@ -30,7 +41,6 @@ class IngredientsDAOTest {
      */
     private void clearTable() {
         try {
-            Connection connection = DatabaseConnection.getInstance();
             connection.createStatement().execute("DELETE FROM Ingredients");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,16 +52,18 @@ class IngredientsDAOTest {
      * Minimum quantity and if it has a quick access flag
      */
     @Test
-    void testInsertAndGetIngredient() {
+    void testInsertAndGetIngredient() throws SQLException {
         Ingredient ingredient = new Ingredient("Test Ingredient", 100, 10, false);
         ingredientsDAO.Insert(ingredient);
+        connection.commit();  // Commit the transaction
 
         List<Ingredient> ingredients = ingredientsDAO.getAll();
-        assertEquals(1, ingredients.size());
-        assertEquals("Test Ingredient", ingredients.get(0).getIngredient());
-        assertEquals(100, ingredients.get(0).getQuantity());
-        assertEquals(10, ingredients.get(0).getMinQuantity());
-        assertFalse(ingredients.get(0).isQuick_access());
+        assertEquals(1, ingredients.size(), "Expected one ingredient after insertion");
+        Ingredient insertedIngredient = ingredients.get(0);
+        assertEquals("Test Ingredient", insertedIngredient.getIngredient());
+        assertEquals(100, insertedIngredient.getQuantity());
+        assertEquals(10, insertedIngredient.getMinQuantity());
+        assertFalse(insertedIngredient.isQuick_access());
     }
 
     //@Test
@@ -80,16 +92,18 @@ class IngredientsDAOTest {
      * Tests if an ingredient can be deleted from the database and verifies if the table is empty after deletion
      */
     @Test
-    void testDeleteIngredient() {
+    void testDeleteIngredient() throws SQLException {
         Ingredient ingredient = new Ingredient("Ingredient to Delete", 100, 10, false);
         ingredientsDAO.Insert(ingredient);
+        connection.commit();  // Commit the insertion
 
         List<Ingredient> ingredients = ingredientsDAO.getAll();
-        assertEquals(1, ingredients.size());
+        assertEquals(1, ingredients.size(), "Expected one ingredient after insertion");
 
         ingredientsDAO.delete(ingredients.get(0));
+        connection.commit();  // Commit the deletion
 
         ingredients = ingredientsDAO.getAll();
-        assertTrue(ingredients.isEmpty());
+        assertTrue(ingredients.isEmpty(), "Expected no ingredients after deletion");
     }
 }
